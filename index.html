@@ -1,0 +1,177 @@
+<!-- 
+ Trabajo de Matias Piedra (354007) & Joaquin Piedra (304804)
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Matias Piedra (354007) & Joaquin Piedra (304804)">
+        <title>Museo de Arte</title>
+        <link rel="stylesheet" href="css/estilos.css">
+    </head>
+    <body>
+        <header>
+            <h1>Museo de Arte</h1>
+            <p class="subtitle">Trabajo realizado por <a href="https://www.linkedin.com/in/matiaspiedra/" target="_blank">MATÍAS PIEDRA (354007)</a> y <a href="https://www.linkedin.com/in/jplangone/" target="_blank">JOAQUÍN PIEDRA (304804)</a></p>
+            <button type="button" class="headerButton">Colores</button>
+        </header>
+
+        <section id="sectionIngresos">
+            <h2 id="ingresos">Ingresos</h2>
+            
+            <div class="inputContainer">
+                <section>
+                    <form id="registrarArtistas">
+                        <h3>Registrar Artistas</h3>
+    
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+    
+                        <label for="edad">Edad:</label>
+                        <input type="number" id="edad" name="edad" required>
+                        
+                        <label for="caracteristica">Características del estilo</label>
+                        <textarea id="caracteristica" name="caracteristica" required></textarea>
+                        
+                        <button class="button" type="button">Agregar Artista</button>
+                    </form>
+                </section>
+                <section>
+                    <form id="ingresarExposiciones">
+                        <h3>Ingresar Exposiciones</h3>
+                        
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" name="titulo" required>
+    
+                        <label for="fecha">Fecha de comienzo:</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" name="descripcion" required></textarea>
+                    
+                        <label>Elegir artista:</label>
+    
+                        <div class="listBoxes">
+                            <select class="listBox" multiple >
+                              <option>Nombre 1</option>
+                              <option>Nombre 2</option>
+                              <option>Nombre 3</option>
+                            </select>
+                            
+                            <button class="headerButton" type="button">&gt;&gt;</button>
+                            <button class="headerButton" type="button">&lt;&lt;</button>
+    
+                            <select class="listBox" multiple required>
+                              <option>Nombre 4</option>
+                              <option>Nombre 5</option>
+                            </select>
+                        </div>
+    
+    
+                        <button class="button" type="button">Agregar Exposición</button>
+                    </form>
+                </section>
+                <section>
+                    <form id="comentariosDeVisitas">
+                        <h3>Comentarios de Visitas</h3>
+                        
+                        <label for="exposicion">Exposición</label>
+                        <select id="exposicion" name="exposicion" required>
+                            <option value="">Título 1</option>
+                        </select>
+    
+                        <label for="nombreVisitante">Nombre del visitante:</label>
+                        <input type="text" id="nombreVisitante" name="nombreVisitante" required>
+    
+                        <label for="comentario">Comentario:</label>
+                        <textarea id="comentario" name="comentario" required></textarea>
+    
+                        <label>Calificación:</label>
+                        <ul class="calificacionList">
+                            <li>
+                                <input type="radio" name="calificacion" value="1" required>
+                                <img class="smiley" src="img/red.jpg" alt="smiley rojo">
+                            </li>
+                            <li>
+                                <input type="radio" name="calificacion" value="2">
+                                <img class="smiley" src="img/orange.jpg" alt="smiley naranja">
+                            </li>
+                            <li>
+                                <input type="radio" name="calificacion" value="3">
+                                <img class="smiley" src="img/yellow.jpg" alt="smiley amarillo">
+                            </li>
+                            <li>
+                                <input type="radio" name="calificacion" value="4">
+                                <img class="smiley" src="img/lightgreen.jpg" alt="smiley verde claro">
+                            </li>
+                            <li>
+                                <input type="radio" name="calificacion" value="5">
+                                <img class="smiley" src="img/green.jpg" alt="smiley verde">
+                            </li>
+                        </ul>
+    
+                        <div class="visitaGuiada">
+                            <input id="guia" type="checkbox" name="guia">
+                            <label for="guia">Hice visita guiada</label>
+                        </div>
+    
+                        <button class="button" type="button">Agregar Comentario</button>
+                    </form>
+                </section>
+            </div>
+        </section>
+        
+        <section id="sectionInfo">
+            <h2>Información General</h2>
+            <p>Título de las Exposiciones con más artistas:</p>
+            <ul>
+                <li>Dato ficticio 1</li>
+                <li>Dato ficticio 2</li>
+            </ul>
+
+            <p>Título y fecha de las Exposiciones con comentarios: (ordenadas por fecha creciente)</p>
+            <ul>
+                <li>Dato ficticio 1</li>
+                <li>Dato ficticio 2</li>
+            </ul>
+
+            <h2>Información de Comentarios</h2>
+
+            <form>
+                <label for="exposicionFiltro">Exposición:</label>
+                <select id="exposicionFiltro" name="exposicionFiltro">
+                    <option value="todas">Todas</option>
+                </select>
+
+                <table>
+                    <tr>
+                        <th>Título</th>
+                        <th>Más datos</th>
+                        <th class="borderRight">Nombre</th>
+                        <th class="comentarios">Comentario</th>
+                        <th>Guiada</th>
+                        <th class="borderRight"><button type="button" class="button">Calificación creciente</button></th>
+                    </tr>
+                    <tr class="tableRow">
+                        <td>Título 1</td>
+                        <td><button  type="button" class="button">Ampliar</button></td>
+                        <td class="borderRight">Nombre ficticio 1</td>
+                        <td class="comentarios">Comentario ficticio 1</td>
+                        <td>NO</td>
+                        <td class="borderRight"><img class="smiley" src="img/red.jpg" alt="rojo"></td>
+                    </tr>
+                    <tr>
+                        <td>Título 2</td>
+                        <td><button  type="button" class="button">Ampliar</button></td>
+                        <td class="borderRight">Nombre ficticio 2</td>
+                        <td class="comentarios">Comentario ficticio 2</td>
+                        <td>SÍ</td>
+                        <td class="borderRight"><img class="smiley" src="img/green.jpg" alt="verde"></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+
+    </body>
+</html>

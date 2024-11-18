@@ -11,30 +11,25 @@ function inicio(){
 
 let colorOriginal = true;
 function cambiarColor(){
-    let cambiarColor = document.getElementsByClassName("cambiarColor")
+    let header = document.getElementById("idHeader");
+    let sectionIngresos = document.getElementById("sectionIngresos");
+    let sectionExposiciones = document.getElementById("sectionInfo");
 
     if(colorOriginal){
-
-        for (let i = 0; i < cambiarColor.length; i++) {
-
-            cambiarColor[i].style.backgroundColor = "#8DB58E"        
-        }
+        header.style.backgroundColor = "#8DB58E";
+        sectionIngresos.style.backgroundColor = "#8DB58E";
+        sectionInfo.style.backgroundColor = "#8DB58E";
         colorOriginal = false;
-    } else if (!colorOriginal){
-        
-        for (let i = 0; i < cambiarColor.length; i++) {
-
-            cambiarColor[i].style.backgroundColor = "#98fb98"
-        }
+    } else{
+        header.style.backgroundColor = "#98fb98";
+        sectionIngresos.style.backgroundColor = "#98fb98";
+        sectionInfo.style.backgroundColor = "#98fb98";
         colorOriginal = true;
     }
 
 }
 
 function agregarArtista(){
-
-    let form = document.getElementById("formRegistrarArtistas")
-
     let nombre = document.getElementById("nombre").value.trim(); // Elimina espacios adicionales
     let edad = document.getElementById("edad").value;
     let caracteristica = document.getElementById("caracteristica").value;
@@ -49,7 +44,7 @@ function agregarArtista(){
     let opciones = listaArtistas1.options;
 
     // Verifica si el artista ya está en la lista
-    for (let i=0; i < opciones.length; i++) {
+    for (let i=0; i<opciones.length; i++) {
         if (opciones[i].text.toLowerCase() === nombre.toLowerCase()) {
             alert("El artista ya está en la lista.");
             return; // Sal del método sin agregar
@@ -150,5 +145,69 @@ function actualizarSelectExposiciones() {
 }
 
 function agregarComentario(){
+    let nombreVisitante = document.getElementById("nombreVisitante").value.trim();
+    let comentario = document.getElementById("comentario").value.trim();
+    let calificacion = document.querySelector('input[name="calificacion"]:checked')?.value; // Asume que la calificación se elige con un radio button
+    let guia = document.getElementById("guia").checked; // Si el visitante hizo una visita guiada
+
+    let selectExposiciones = document.getElementById("exposicion");
+    let tituloExposicion = selectExposiciones.value;
+
+    // Validar que todos los campos estén completos
+    if (!nombreVisitante || !comentario || !calificacion || !tituloExposicion) {
+        alert("Por favor, complete todos los campos.");
+        return;
+    }
+
+    // Buscar la exposición correspondiente
+    let exposicion = exposiciones.find(expo => expo.titulo === tituloExposicion);
     
+    // Si se encuentra la exposición, agregar el comentario
+    if (exposicion) {
+        exposicion.agregarComentario(nombreVisitante, comentario, calificacion, guia);
+    }
+
+    // Limpiar el formulario
+    document.getElementById("formComentario").reset();
+
+    // Actualizar la tabla de comentarios
+    actualizarTablaComentarios();
+}
+
+function actualizarTablaComentarios() {
+    let selectExposicion = document.getElementById("exposicion");
+    let tituloExposicion = selectExposicion.value;
+
+    let exposicion = exposiciones.find(expo => expo.titulo === tituloExposicion);
+    
+    // Limpiar la tabla antes de actualizar
+    let tablaComentarios = document.getElementById("tablaComentarios");
+    tablaComentarios.innerHTML = "";
+
+    if (exposicion) {
+        exposicion.comentarios.forEach(comentario => {
+            // Crear una fila para cada comentario
+            let fila = document.createElement("tr");
+
+            // Crear celdas para el nombre, comentario, calificación e indicación de visita guiada
+            let celdaNombre = document.createElement("td");
+            celdaNombre.textContent = comentario.nombreVisitante;
+            fila.appendChild(celdaNombre);
+
+            let celdaComentario = document.createElement("td");
+            celdaComentario.textContent = comentario.comentario;
+            fila.appendChild(celdaComentario);
+
+            let celdaCalificacion = document.createElement("td");
+            celdaCalificacion.textContent = comentario.calificacion;
+            fila.appendChild(celdaCalificacion);
+
+            let celdaGuia = document.createElement("td");
+            celdaGuia.textContent = comentario.guia ? "Sí" : "No";
+            fila.appendChild(celdaGuia);
+
+            // Agregar la fila a la tabla
+            tablaComentarios.appendChild(fila);
+        });
+    }
 }

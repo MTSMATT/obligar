@@ -29,19 +29,6 @@ function cambiarColor(){
 }
 
 function agregarArtista(){
-    /*
-    let nombre = document.getElementById("nombre").value.trim();
-    let edad = document.getElementById("edad").value;
-    let caracteristica = document.getElementById("caracteristica").value;
-
-    let artista = {nombre:nombre, edad:edad, caracteristica:caracteristica};
-    
-    let nuevoOption = document.createElement("option");
-    let listaArtistas1 = document.getElementById("idListaArtistas1");
-    listaArtistas1.appendChild(nuevoOption);
-    nuevoOption.innerHTML = artista.nombre;
-    */
-
     let nombre = document.getElementById("nombre").value.trim(); // Elimina espacios adicionales
     let edad = document.getElementById("edad").value;
     let caracteristica = document.getElementById("caracteristica").value;

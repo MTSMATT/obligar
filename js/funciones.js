@@ -32,6 +32,10 @@ function agregarArtista(){
     let nombre = document.getElementById("nombre").value.trim(); // Elimina espacios adicionales
     let edad = document.getElementById("edad").value;
     let caracteristica = document.getElementById("caracteristica").value;
+function agregarArtista(){
+    let nombre = document.getElementById("nombre").value.trim(); // Elimina espacios adicionales
+    let edad = document.getElementById("edad").value;
+    let caracteristica = document.getElementById("caracteristica").value;
 
     // Validar
     if (!nombre || !edad || !caracteristica) {
@@ -60,9 +64,14 @@ function agregarArtista(){
     listaArtistas1.appendChild(nuevoOption);
 
     document.getElementById("formRegistrarArtistas").reset();
+    document.getElementById("formRegistrarArtistas").reset();
 
 }
+}
 
+function moverArtistaDerecha(){
+    let listaArtistas1 = document.getElementById("idListaArtistas1");
+    let listaArtistas2 = document.getElementById("idListaArtistas2");
 function moverArtistaDerecha(){
     let listaArtistas1 = document.getElementById("idListaArtistas1");
     let listaArtistas2 = document.getElementById("idListaArtistas2");
@@ -75,7 +84,15 @@ function moverArtistaDerecha(){
         listaArtistas2.appendChild(opcion);
     });
 }
+    // Mueve cada opción seleccionada al segundo select
+    opcionesSeleccionadas.forEach(opcion => {
+        listaArtistas2.appendChild(opcion);
+    });
+}
 
+function moverArtistaIzquierda(){
+    let listaArtistas1 = document.getElementById("idListaArtistas1");
+    let listaArtistas2 = document.getElementById("idListaArtistas2");
 function moverArtistaIzquierda(){
     let listaArtistas1 = document.getElementById("idListaArtistas1");
     let listaArtistas2 = document.getElementById("idListaArtistas2");
@@ -83,6 +100,11 @@ function moverArtistaIzquierda(){
     // Obtiene los artistas seleccionados en el segundo select
     let opcionesSeleccionadas = Array.from(listaArtistas2.selectedOptions);
 
+    // Mueve cada opción seleccionada al primer select
+    opcionesSeleccionadas.forEach(opcion => {
+        listaArtistas1.appendChild(opcion);
+    });
+}
     // Mueve cada opción seleccionada al primer select
     opcionesSeleccionadas.forEach(opcion => {
         listaArtistas1.appendChild(opcion);

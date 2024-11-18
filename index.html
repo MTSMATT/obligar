@@ -12,22 +12,26 @@
         <script src="./js/main.js" defer></script>
 
         <link rel="stylesheet" href="css/estilos.css">
+        <script src="js/funciones.js"></script>
+        <script src="js/clases.js"></script>
     </head>
     <body>
-        <header>
+        <header id="idHeader">
             <h1>Museo de Arte</h1>
             <p class="subtitle">Trabajo realizado por <a href="https://www.linkedin.com/in/matiaspiedra/" target="_blank">MATÍAS PIEDRA (354007)</a> y <a href="https://www.linkedin.com/in/jplangone/" target="_blank">JOAQUÍN PIEDRA (304804)</a></p>
-            <button type="button" class="headerButton">Colores</button>
+            <button id="botonColores" type="button" class="headerButton">Colores</button>
         </header>
 
-        <section id="sectionIngresos">
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+        <section id="sectionIngresos" class="container">
             <h2 id="ingresos">Ingresos</h2>
-            
+
             <div class="inputContainer">
-                <section>
-                    <form id="registrarArtistas">
-                        <h3>Registrar Artistas</h3>
-    
+
+                <section id="sectionArtistas" class="sectionForm">
+                    <h3>Registrar Artistas</h3>
+                    <form id="formRegistrarArtistas">
                         <label for="nombre">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required>
     
@@ -37,12 +41,14 @@
                         <label for="caracteristica">Características del estilo</label>
                         <textarea id="caracteristica" name="caracteristica" required></textarea>
                         
-                        <button class="button" type="button">Agregar Artista</button>
+                        <button id="botonAgregarArtista" class="button" type="button">Agregar Artista</button>
                     </form>
                 </section>
-                <section>
-                    <form id="ingresarExposiciones">
-                        <h3>Ingresar Exposiciones</h3>
+                
+
+                <section id="sectionExposiciones" class="sectionForm">
+                    <h3>Ingresar Exposiciones</h3>
+                    <form id="formIngresarExposiciones">
                         
                         <label for="titulo">Título:</label>
                         <input type="text" id="titulo" name="titulo" required>
@@ -55,33 +61,31 @@
                     
                         <label>Elegir artista:</label>
     
-                        <div class="listBoxes">
-                            <select class="listBox" multiple >
-                              <option>Nombre 1</option>
-                              <option>Nombre 2</option>
-                              <option>Nombre 3</option>
+                        <div class="elegirArtista">
+                            <select id="idListaArtistas1" class="listaArtistas" multiple >
+
                             </select>
                             
                             <button class="headerButton" type="button">&gt;&gt;</button>
                             <button class="headerButton" type="button">&lt;&lt;</button>
     
-                            <select class="listBox" multiple required>
-                              <option>Nombre 4</option>
-                              <option>Nombre 5</option>
+                            <select id="idListaArtistas2" class="listaArtistas" multiple required>
+
                             </select>
                         </div>
     
     
-                        <button class="button" type="button">Agregar Exposición</button>
+                        <button id="botonAgregarExposicion" class="button" type="button">Agregar Exposición</button>
                     </form>
                 </section>
-                <section>
-                    <form id="comentariosDeVisitas">
-                        <h3>Comentarios de Visitas</h3>
-                        
+
+
+                <section id="sectionComentarios" class="sectionForm">
+                    <h3>Comentarios de Visitas</h3>
+                    <form id="formComentariosDeVisitas">
                         <label for="exposicion">Exposición</label>
                         <select id="exposicion" name="exposicion" required>
-                            <option value="">Título 1</option>
+
                         </select>
     
                         <label for="nombreVisitante">Nombre del visitante:</label>
@@ -93,50 +97,58 @@
                         <label>Calificación:</label>
                         <ul class="calificacionList">
                             <li>
-                                <input type="radio" name="calificacion" value="1" required>
-                                <img class="smiley" src="img/red.jpg" alt="smiley rojo">
+                                <label for="calificacionRojo">
+                                    <input id="calificacionRojo" type="radio" name="calificacion" value="1" required>
+                                    <img  class="imagen" src="img/red.jpg" alt="imagen rojo">
+                                </label>
                             </li>
                             <li>
-                                <input type="radio" name="calificacion" value="2">
-                                <img class="smiley" src="img/orange.jpg" alt="smiley naranja">
+                                <label for="calificacionNaranja">
+                                    <input id="calificacionNaranja" type="radio" name="calificacion" value="2">
+                                    <img class="imagen" src="img/orange.jpg" alt="imagen naranja">
+                                </label>
                             </li>
                             <li>
-                                <input type="radio" name="calificacion" value="3">
-                                <img class="smiley" src="img/yellow.jpg" alt="smiley amarillo">
+                                <label for="calificacionAmarillo">
+                                    <input id="calificacionAmarillo" type="radio" name="calificacion" value="3">
+                                    <img class="imagen" src="img/yellow.jpg" alt="imagen amarillo">
+                                </label>
                             </li>
                             <li>
-                                <input type="radio" name="calificacion" value="4">
-                                <img class="smiley" src="img/lightgreen.jpg" alt="smiley verde claro">
+                                <label for="calificacionVerdeClaro">
+                                    <input id="calificacionVerdeClaro" type="radio" name="calificacion" value="4">
+                                    <img class="imagen" src="img/lightgreen.jpg" alt="imagen verde claro">
+                                </label>
                             </li>
                             <li>
-                                <input type="radio" name="calificacion" value="5">
-                                <img class="smiley" src="img/green.jpg" alt="smiley verde">
+                                <label for="calificacionVerde">
+                                    <input id="calificacionVerde" type="radio" name="calificacion" value="5" checked>
+                                    <img class="imagen" src="img/green.jpg" alt="imagen verde">
+                                </label>
                             </li>
                         </ul>
-    
                         <div class="visitaGuiada">
                             <input id="guia" type="checkbox" name="guia">
                             <label for="guia">Hice visita guiada</label>
                         </div>
-    
-                        <button class="button" type="button">Agregar Comentario</button>
+                        <button id="botonAgregarComentario" class="button" type="button">Agregar Comentario</button>
                     </form>
                 </section>
             </div>
         </section>
         
-        <section id="sectionInfo">
+<!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+        <section id="sectionInfo" class="container">
             <h2>Información General</h2>
-            <p>Título de las Exposiciones con más artistas:</p>
+            <p>Título de la/s Exposiciones con más artistas:</p>
             <ul>
-                <li>Dato ficticio 1</li>
-                <li>Dato ficticio 2</li>
+                <li>sin datos</li>
             </ul>
 
-            <p>Título y fecha de las Exposiciones con comentarios: (ordenadas por fecha creciente)</p>
+            <p>Título y fecha de la/s Exposiciones sin comentarios: (ordenadas por fecha creciente)</p>
             <ul>
-                <li>Dato ficticio 1</li>
-                <li>Dato ficticio 2</li>
+                <li>sin datos</li>
             </ul>
 
             <h2>Información de Comentarios</h2>
@@ -156,22 +168,7 @@
                         <th>Guiada</th>
                         <th class="borderRight"><button type="button" class="button">Calificación creciente</button></th>
                     </tr>
-                    <tr class="tableRow">
-                        <td>Título 1</td>
-                        <td><button  type="button" class="button">Ampliar</button></td>
-                        <td class="borderRight">Nombre ficticio 1</td>
-                        <td class="comentarios">Comentario ficticio 1</td>
-                        <td>NO</td>
-                        <td class="borderRight"><img class="smiley" src="img/red.jpg" alt="rojo"></td>
-                    </tr>
-                    <tr>
-                        <td>Título 2</td>
-                        <td><button  type="button" class="button">Ampliar</button></td>
-                        <td class="borderRight">Nombre ficticio 2</td>
-                        <td class="comentarios">Comentario ficticio 2</td>
-                        <td>SÍ</td>
-                        <td class="borderRight"><img class="smiley" src="img/green.jpg" alt="verde"></td>
-                    </tr>
+                    
                 </table>
             </form>
         </section>

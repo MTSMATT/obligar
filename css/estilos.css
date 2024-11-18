@@ -5,6 +5,7 @@ Trabajo de Matias Piedra (354007) & Joaquin Piedra (304804)
 *{
     padding: 0;
     margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 ul {
@@ -13,7 +14,6 @@ ul {
 
 body {
     background-color: #F2F1F9;
-    font-family: Arial, sans-serif;
     color: #000;
     margin: 0;
 }
@@ -36,18 +36,19 @@ header {
     border-style: solid;
     font-weight: bold;
     border-radius: 4px;
-} 
-
-.headerButton:hover{
+} .headerButton:hover{
     cursor: pointer;
     background-color: #ddd;
-}
-
-.headerButton:active{
+} .headerButton:active{
     background-color: #bbb;
 }
 
 /* --------------------------------------- */
+
+.inputContainer{
+    display: flex;
+    justify-content: space-between;
+}
 
 #sectionIngresos {
     background-color: #98fb98;
@@ -55,14 +56,7 @@ header {
     overflow: hidden;
     padding: 24px 28px;
     border-radius: 24px;
-}
-
-.inputContainer{
-    display: flex;
-    justify-content: space-between;
-}
-
-#sectionIngresos form {
+} #sectionIngresos .sectionForm {
     background-color: #a4eba4;
     margin: 10px;
     width: 30%;
@@ -71,61 +65,54 @@ header {
     text-align: left;
     padding: 20px 10px;
     font-weight: bold;
-}
-
-#sectionIngresos form label {
+} #sectionIngresos form label {
     margin-top: 16px;
     margin-bottom: 8px;
     display: block;
-}
-
-#sectionIngresos form > input {
+} #sectionIngresos form > input, #sectionIngresos form textarea {
     width: 95%;
     height: 24px;
     padding: 4px 8px;
     border: 2px solid #aaa;
     border-radius: 4px;
-}
-
-#sectionIngresos form textarea {
-    border: 2px solid #aaa;
-    width: 95%;
+} #sectionIngresos form textarea {
     resize: vertical;
     height: 48px;
-    padding: 4px 8px;
-    border-radius: 4px;
+} #sectionIngresos .button {
+    margin-top: 16px;
+} #sectionIngresos > h2 {
+    margin-top: 17px;
+    margin-bottom: 15px;
 }
 
 
-.listBoxes {
+
+.elegirArtista {
     display: flex;
     align-items: start;
     margin: 10px 0;
     gap: 4px;
-}
-
-.listBoxes button {
+} .elegirArtista button {
     padding: 8px 6px;
 }
 
-.listBox {
+.listaArtistas {
     width: 50%;
     height: 92px;
     border: 2px solid #aaa;
     border-radius: 4px;
-}
-
-.listBox option {
+} .listaArtistas option {
     font-weight: bold;
 }
+
+
 
 #exposicion {
     font-weight: bold;
+    width: 200px;
 }
 
-#sectionIngresos .button {
-    margin-top: 16px;
-}
+
 
 .button {
     background-color: #4caf50;
@@ -136,64 +123,52 @@ header {
     border-radius: 4px;
     border: 2px solid transparent;
     border-color: #4caf50 #409044 #409044 #4caf50; 
-}
-
-.button:hover {
+} .button:hover {
     background-color: #5ac55e;
     border-color: #5ac55e #4caf50 #4caf50 #5ac55e; 
-}
-
-.button:active{
+} .button:active{
     background-color: #409044;
     border-color: #409044; 
 }
 
-#ingresarExposiciones textarea {
-    margin-bottom: 16px;
-}
 
-#comentariosDeVisitas textarea{
-    margin-bottom: 16px;
-}
 
-.smiley {
+.imagen {
     width: 60px;
     height: 60px;
     cursor: pointer;
-}
+} .imagen:hover{
+    outline: black solid 2px;
+} 
 
 .calificacionList{
     width: 100%;
     display: inline-flex;
-    margin-top: 12px;
+    margin-top: 0;
     padding: 0;
     margin-bottom: 0;
-}
-
-.calificacionList input {
+} .calificacionList input {
     display: none;
-}
-
-.calificacionList li {
+} .calificacionList input:checked + img{
+    outline: black solid 3px;
+} .calificacionList li {
     margin: 5px;
 }
+
 
 .visitaGuiada {
     display: inline-flex;
     width: 100%;
     justify-content: start;
     align-items: center;
-}
 
-.visitaGuiada label {
+} .visitaGuiada label {
     margin: 0 !important;
-}
-
-.visitaGuiada input {
+} .visitaGuiada input {
     margin: 0 15px;
 }
 
-/* --------------------------------------------- */
+/* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 
 #sectionInfo {
     background-color: #98fb98;
@@ -201,17 +176,12 @@ header {
     font-weight: bold;
     padding: 24px 28px;
     border-radius: 30px;
-}
-
-#sectionInfo > h2 {
+} #sectionInfo > h2 {
     margin-bottom: 18px;
     margin-top: 17px;
 }
 
-#sectionIngresos > h2 {
-    margin-top: 17px;
-    margin-bottom: 15px;
-}
+
 
 h3, h2 {
     font-size: 25px;
@@ -220,57 +190,36 @@ h3, h2 {
 #sectionInfo ul {
     list-style-type: square;
     margin: 18px 38px;
-}
-
-#sectionInfo form label {
+} #sectionInfo form label {
     display: block;
     margin-bottom: 8px;
     padding: 0;
-}
-
-#sectionInfo form select {
+} #sectionInfo form select {
     font-weight: bold;
     padding-right: 8px;
     margin-bottom: 32px;
-}
-
-
-#sectionInfo table {
+} #sectionInfo table {
     width: 100%;
     margin: 8px 0;
     border-spacing: 0;
-    outline: 5px double #000;
     outline-offset: -4px;
     border-collapse: collapse;
-}
-
-#sectionInfo th, td {
-    border-right: 5px solid black;
-    border-left: 5px solid black;
+} #sectionInfo th, td {
+    border: 5px double black;
     padding: 16px 0;
     text-align: center;
     vertical-align: middle;
-}
-
-#sectionInfo td {
+} #sectionInfo td {
     padding: 6px 0;
-}
-
-#sectionInfo .tableRow {
+} #sectionInfo .tableRow {
     outline: 5px double #000;
     outline-offset: -2px;
-}
-
-#sectionInfo .comentarios {     
-    border-left: 5px double black;
-    border-right: 5px double black;
-}
-
-#sectionInfo th {
+} #sectionInfo th {
     background-color: #f2f2f2;
-}
-
-#sectionInfo table button {
+} #sectionInfo table button {
     padding: 5px;
 }
 
+#sectionInfo #exposicionFiltro{
+    width: 200px;
+}

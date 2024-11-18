@@ -4,7 +4,8 @@ function inicio(){
 	document.getElementById("botonColores").addEventListener("click", cambiarColor);
     document.getElementById("botonAgregarArtista").addEventListener("click", agregarArtista);
 	document.getElementById("botonColores").addEventListener("click", agregarExposicion);
-	document.getElementById("botonColores").addEventListener("click", agregarComentario);
+	document.getElementById("moverArtistaDerecha").addEventListener("click", moverArtistaDerecha);
+    document.getElementById("moverArtistaIzquierda").addEventListener("click", moverArtistaIzquierda);
 }
 
 let colorOriginal = true;
@@ -70,9 +71,30 @@ function agregarArtista(){
     alert("Artista agregado exitosamente.");
 }
 
-function moverArtista(){
-    let listaArtista1 = document.getElementById("listaArtista1");
-    let listaArtista2 = document.getElementById("listaArtista2");
+function moverArtistaDerecha(){
+    let listaArtistas1 = document.getElementById("idListaArtistas1");
+    let listaArtistas2 = document.getElementById("idListaArtistas2");
+
+    // Obtiene los artistas seleccionados en el primer select
+    let opcionesSeleccionadas = Array.from(listaArtistas1.selectedOptions);
+
+    // Mueve cada opción seleccionada al segundo select
+    opcionesSeleccionadas.forEach(opcion => {
+        listaArtistas2.appendChild(opcion);
+    });
+}
+
+function moverArtistaIzquierda(){
+    let listaArtistas1 = document.getElementById("idListaArtistas1");
+    let listaArtistas2 = document.getElementById("idListaArtistas2");
+
+    // Obtiene los artistas seleccionados en el segundo select
+    let opcionesSeleccionadas = Array.from(listaArtistas2.selectedOptions);
+
+    // Mueve cada opción seleccionada al primer select
+    opcionesSeleccionadas.forEach(opcion => {
+        listaArtistas1.appendChild(opcion);
+    });
 }
 
 function agregarExposicion(){

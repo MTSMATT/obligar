@@ -3,9 +3,10 @@ window.addEventListener("load", inicio);
 function inicio(){
 	document.getElementById("botonColores").addEventListener("click", cambiarColor);
     document.getElementById("botonAgregarArtista").addEventListener("click", agregarArtista);
-	document.getElementById("botonColores").addEventListener("click", agregarExposicion);
+    document.getElementById("botonAgregarExposicion").addEventListener("click", agregarExposicion);
 	document.getElementById("moverArtistaDerecha").addEventListener("click", moverArtistaDerecha);
     document.getElementById("moverArtistaIzquierda").addEventListener("click", moverArtistaIzquierda);
+
 }
 
 let colorOriginal = true;
@@ -31,9 +32,12 @@ function cambiarColor(){
 }
 
 function agregarArtista(){
+<<<<<<< HEAD
 
     let form = document.getElementById("formRegistrarArtistas")
 
+=======
+>>>>>>> d05c436cfce601459965366202224fa5d4327621
     let nombre = document.getElementById("nombre").value.trim(); // Elimina espacios adicionales
     let edad = document.getElementById("edad").value;
     let caracteristica = document.getElementById("caracteristica").value;
@@ -60,7 +64,12 @@ function agregarArtista(){
     nuevoOption.innerHTML = nombre; // Usamos solo el nombre como texto visible
     listaArtistas1.appendChild(nuevoOption);
 
+<<<<<<< HEAD
     form.reset()
+=======
+    document.getElementById("formRegistrarArtistas").reset();
+
+>>>>>>> d05c436cfce601459965366202224fa5d4327621
 }
 
 function moverArtistaDerecha(){
@@ -89,8 +98,62 @@ function moverArtistaIzquierda(){
     });
 }
 
+let exposiciones = [];
 function agregarExposicion(){
+    // Obtener los valores del formulario
+    let titulo = document.getElementById("titulo").value.trim();
+    let fecha = document.getElementById("fecha").value;
+    let descripcion = document.getElementById("descripcion").value.trim();
+    let listaArtistas2 = document.getElementById("idListaArtistas2");
     
+    // Validar que todos los campos estén completos
+    if (!titulo || !fecha || !descripcion || listaArtistas2.options.length === 0) {
+        alert("Por favor, complete todos los campos y seleccione al menos un artista.");
+        return;
+    }
+    
+    // Obtener los artistas seleccionados
+    let artistasSeleccionados = Array.from(listaArtistas2.options).map(option => option.text);
+    
+    // Crear nueva exposición
+    let nuevaExposicion = new Exposicion(titulo, fecha, descripcion, artistasSeleccionados);
+    
+    // Agregar la exposición al array
+    exposiciones.push(nuevaExposicion);
+    
+    // Actualizar el select de exposiciones en la sección de comentarios
+    actualizarSelectExposiciones();
+    
+    // Limpiar el formulario
+    document.getElementById("formIngresarExposiciones").reset();
+    // Devolver los artistas a la lista 1
+    while (listaArtistas2.options.length > 0) {
+        document.getElementById("idListaArtistas1").appendChild(listaArtistas2.options[0]);
+    }
+}
+
+function actualizarSelectExposiciones() {
+    let selectExposicion = document.getElementById("exposicion");
+    let selectExposicionFiltro = document.getElementById("exposicionFiltro");
+    
+    // Limpiar las opciones actuales
+    selectExposicion.innerHTML = "";
+    selectExposicionFiltro.innerHTML = "<option value='todas'>Todas</option>";
+    
+    // Agregar las exposiciones a ambos selects
+    exposiciones.forEach(expo => {
+        // Agregar al select de comentarios
+        let option1 = document.createElement("option");
+        option1.value = expo.titulo;
+        option1.text = expo.titulo;
+        selectExposicion.appendChild(option1);
+        
+        // Agregar al select de filtro
+        let option2 = document.createElement("option");
+        option2.value = expo.titulo;
+        option2.text = expo.titulo;
+        selectExposicionFiltro.appendChild(option2);
+    });
 }
 
 function agregarComentario(){

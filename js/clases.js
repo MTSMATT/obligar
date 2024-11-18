@@ -35,8 +35,16 @@ class Exposicion {
         this.comentario = []
     }
 
-    agregarComentario (comentarios) {
-        this.comentario.push(comentarios)
+    agregarComentario (nombreVisitante, comentario, calificacion, guia) {
+        // Creamos el comentario
+        let nuevoComentario = {
+            nombreVisitante: nombreVisitante,
+            comentario: comentario,
+            calificacion: calificacion,
+            guia: guia
+        };
+        this.comentarios.push(nuevoComentario);
+
     }
 }
 

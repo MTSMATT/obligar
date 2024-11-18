@@ -1,12 +1,28 @@
 class Sistema {
-    constructor(parameters) {
-        
+    constructor() {
+        this.artistas = [];
+        this.exposiciones = [];
+        this.comentarios = []
+    }
+
+    agregarArtista (artista) {
+        this.artistas.push(artista)
+    }
+
+    agregarExposicion (expo) {
+        this.exposiciones.push(expo)
+    }
+
+    agregarComentario (coment) {
+        this.comentarios.push(coment)
     }
 }
 
 class Artista {
-    constructor(parameters) {
-        
+    constructor(nombre, edad, caracteristica) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.caracteristica = caracteristica
     }
 }
 
@@ -16,11 +32,20 @@ class Exposicion {
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.artistas = artistas;
+        this.comentario = []
+    }
+
+    agregarComentario (comentarios) {
+        this.comentario.push(comentarios)
     }
 }
 
 class Visita {
-    constructor(parameters) {
-        
+    constructor(exposicion, nombreVisitante, comentario, calificacion, guia) {
+        this.exposicion = exposicion;
+        this.nombreVisitante = nombreVisitante;
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.guia = guia
     }
 }

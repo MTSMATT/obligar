@@ -11,8 +11,11 @@ class Artista {
 }
 
 class Exposicion {
-    constructor(parameters) {
-        
+    constructor(titulo, fecha, descripcion, artistas) {
+        this.titulo = titulo;
+        this.fecha = fecha;
+        this.descripcion = descripcion;
+        this.artistas = artistas;
     }
 }
 

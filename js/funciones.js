@@ -32,12 +32,9 @@ function cambiarColor(){
 }
 
 function agregarArtista(){
-<<<<<<< HEAD
 
     let form = document.getElementById("formRegistrarArtistas")
 
-=======
->>>>>>> d05c436cfce601459965366202224fa5d4327621
     let nombre = document.getElementById("nombre").value.trim(); // Elimina espacios adicionales
     let edad = document.getElementById("edad").value;
     let caracteristica = document.getElementById("caracteristica").value;
@@ -64,12 +61,8 @@ function agregarArtista(){
     nuevoOption.innerHTML = nombre; // Usamos solo el nombre como texto visible
     listaArtistas1.appendChild(nuevoOption);
 
-<<<<<<< HEAD
-    form.reset()
-=======
     document.getElementById("formRegistrarArtistas").reset();
 
->>>>>>> d05c436cfce601459965366202224fa5d4327621
 }
 
 function moverArtistaDerecha(){

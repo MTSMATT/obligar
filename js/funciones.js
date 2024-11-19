@@ -290,6 +290,7 @@ function actualizarTablaComentarios() {
         const cellMasDatos = row.insertCell();
         const btnAmpliar = document.createElement("button");
         btnAmpliar.textContent = "Ampliar";
+        btnAmpliar.type = "button";
         btnAmpliar.className = "button";
         btnAmpliar.onclick = () => mostrarDetallesExposicion(comentario.exposicion);
         cellMasDatos.appendChild(btnAmpliar);
@@ -317,6 +318,7 @@ function actualizarTablaComentarios() {
 
 // Función para mostrar detalles de una exposición
 function mostrarDetallesExposicion(exposicion) {
+    //event.preventDefault();
     let detalles = `
         Título: ${exposicion.titulo}
         Fecha: ${new Date(exposicion.fecha).toLocaleDateString()}

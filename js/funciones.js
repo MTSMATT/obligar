@@ -32,10 +32,6 @@ function agregarArtista(){
     let nombre = document.getElementById("nombre").value.trim(); // Elimina espacios adicionales
     let edad = document.getElementById("edad").value;
     let caracteristica = document.getElementById("caracteristica").value;
-function agregarArtista(){
-    let nombre = document.getElementById("nombre").value.trim(); // Elimina espacios adicionales
-    let edad = document.getElementById("edad").value;
-    let caracteristica = document.getElementById("caracteristica").value;
 
     // Validar
     if (!nombre || !edad || !caracteristica) {
@@ -64,14 +60,9 @@ function agregarArtista(){
     listaArtistas1.appendChild(nuevoOption);
 
     document.getElementById("formRegistrarArtistas").reset();
-    document.getElementById("formRegistrarArtistas").reset();
 
 }
-}
 
-function moverArtistaDerecha(){
-    let listaArtistas1 = document.getElementById("idListaArtistas1");
-    let listaArtistas2 = document.getElementById("idListaArtistas2");
 function moverArtistaDerecha(){
     let listaArtistas1 = document.getElementById("idListaArtistas1");
     let listaArtistas2 = document.getElementById("idListaArtistas2");
@@ -84,15 +75,7 @@ function moverArtistaDerecha(){
         listaArtistas2.appendChild(opcion);
     });
 }
-    // Mueve cada opción seleccionada al segundo select
-    opcionesSeleccionadas.forEach(opcion => {
-        listaArtistas2.appendChild(opcion);
-    });
-}
 
-function moverArtistaIzquierda(){
-    let listaArtistas1 = document.getElementById("idListaArtistas1");
-    let listaArtistas2 = document.getElementById("idListaArtistas2");
 function moverArtistaIzquierda(){
     let listaArtistas1 = document.getElementById("idListaArtistas1");
     let listaArtistas2 = document.getElementById("idListaArtistas2");
@@ -105,28 +88,14 @@ function moverArtistaIzquierda(){
         listaArtistas1.appendChild(opcion);
     });
 }
-    // Mueve cada opción seleccionada al primer select
-    opcionesSeleccionadas.forEach(opcion => {
-        listaArtistas1.appendChild(opcion);
-    });
-}
 
 
 // let exposiciones = [];
 function agregarExposicion(){
-    // Debug: Log the start of the function
-    console.log("Agregando Exposición");
-
     let titulo = document.getElementById("titulo").value.trim();
     let fecha = document.getElementById("fecha").value;
     let descripcion = document.getElementById("descripcion").value.trim();
     let listaArtistas2 = document.getElementById("idListaArtistas2");
-    
-    // Debug: Log input values
-    console.log("Título:", titulo);
-    console.log("Fecha:", fecha);
-    console.log("Descripción:", descripcion);
-    console.log("Artistas seleccionados:", listaArtistas2.options.length);
     
     // Validaciones
     if (!titulo || !fecha || !descripcion || listaArtistas2.options.length === 0) {
@@ -137,19 +106,10 @@ function agregarExposicion(){
     // Obtener los nombres de artistas seleccionados
     let artistasSeleccionados = Array.from(listaArtistas2.options).map(option => option.text);
     
-    // Debug: Log artistas seleccionados
-    console.log("Artistas seleccionados:", artistasSeleccionados);
-    
     // Crear nueva exposicion y agregarla al sistema
     let nuevaExposicion = new Exposicion(titulo, fecha, descripcion, artistasSeleccionados);
     
-    // Debug: Verify exposicion creation
-    console.log("Nueva Exposición:", nuevaExposicion);
-    
     sistemaMuseo.agregarExposicion(nuevaExposicion);
-    
-    // Debug: Log sistema's exposiciones
-    console.log("Exposiciones en el sistema:", sistemaMuseo.exposiciones);
     
     // Actualizar el select de exposiciones en la sección de comentarios
     actualizarSelectExposiciones();
@@ -170,7 +130,7 @@ function actualizarSelectExposiciones() {
     selectExposicionFiltro.innerHTML = "<option value='todas'>Todas</option>";
     
     // Agregar las exposiciones a ambos selects
-    sistemaMuseo.exposiciones.forEach(ecpo => {
+    sistemaMuseo.exposiciones.forEach(expo => {
         // Agregar al select de comentarios
         let option1 = document.createElement("option");
         option1.value = expo.titulo;
@@ -185,45 +145,202 @@ function actualizarSelectExposiciones() {
     })
 }
 
-function agregarComentario(){
+// Variable global para el orden de la tabla
+let ordenAscendente = true;
+
+function agregarComentario() {
     // Obtener valores del form
-    let exposicionTitulo = document.getElementById("exposicion").value
-    let nombreVisitante = document.getElementById("nombreVisitante").value.trim()
-    let comentarioTexto = document.getElementById("comentario").value.trim()
-
+    let exposicionTitulo = document.getElementById("exposicion").value;
+    let nombreVisitante = document.getElementById("nombreVisitante").value.trim();
+    let comentarioTexto = document.getElementById("comentario").value.trim();
+    
     // Obtener calificacion
-    let calificacion = document.querySelector('input[name="calificacion"]:checked').value
-
+    let calificacion = document.querySelector('input[name="calificacion"]:checked').value;
+    
     // Verificar visita guiada
     let guia = document.getElementById("guia").checked;
-
+    
     // Validaciones
-    if (!nombreVisitante || !comentarioTexto) {
+    if (!exposicionTitulo || !nombreVisitante || !comentarioTexto) {
         alert("Por favor, complete todos los campos.");
         return;
     }
-
-     // Encontrar la exposición correspondiente
-     let exposicionEncontrada = sistemaMmuseo.exposiciones.find(expo => expo.titulo === exposicionTitulo);
     
-     if (!exposicionEncontrada) {
-         alert("Exposición no encontrada.");
-         return;
-     }
- 
-     // Crear nueva vista (comentario)
-     let nuevaVista = new Vista(
-         exposicionEncontrada, 
-         nombreVisitante, 
-         comentarioTexto, 
-         parseInt(calificacion), 
-         guia
-     );
- 
-     // Agregar comentario a la exposición y al sistema
-     exposicionEncontrada.agregarComentario(nuevaVista);
-     sistemaMmuseo.agregarComentario(nuevaVista);
- 
-     // Limpiar formulario
-     document.getElementById("formComentariosDeVisitas").reset();
+    // Encontrar la exposición correspondiente
+    let exposicionEncontrada = sistemaMuseo.exposiciones.find(expo => expo.titulo === exposicionTitulo);
+    
+    if (!exposicionEncontrada) {
+        alert("Exposición no encontrada.");
+        return;
+    }
+    
+    // Crear nueva Visita (comentario)
+    let nuevaVisita = new Visita(
+        exposicionEncontrada,
+        nombreVisitante,
+        comentarioTexto,
+        parseInt(calificacion),
+        guia
+    );
+    
+    // Agregar comentario a la exposición y al sistema
+    exposicionEncontrada.agregarComentario(nuevaVisita);
+    sistemaMuseo.agregarComentario(nuevaVisita);
+    
+    // Actualizar la información mostrada
+    actualizarInformacionGeneral();
+    actualizarTablaComentarios();
+    
+    // Limpiar formulario
+    document.getElementById("formComentariosDeVisitas").reset();
 }
+
+// Función para actualizar la información general
+function actualizarInformacionGeneral() {
+    actualizarExposicionesConMasArtistas();
+    actualizarExposicionesSinComentarios();
+}
+
+// Función para encontrar y mostrar exposiciones con más artistas
+function actualizarExposicionesConMasArtistas() {
+    const exposiciones = sistemaMuseo.exposiciones;
+    if (exposiciones.length === 0) {
+        document.querySelector("#sectionInfo ul:first-of-type").innerHTML = "<li>sin datos</li>";
+        return;
+    }
+    
+    // Encontrar el máximo número de artistas
+    const maxArtistas = Math.max(...exposiciones.map(expo => expo.artistas.length));
+    
+    // Filtrar exposiciones con el máximo número de artistas
+    const exposicionesMaxArtistas = exposiciones
+        .filter(expo => expo.artistas.length === maxArtistas)
+        .map(expo => expo.titulo)
+        .sort(); // Ordenar alfabéticamente
+    
+    // Actualizar la lista en el DOM
+    const lista = document.querySelector("#sectionInfo ul:first-of-type");
+    lista.innerHTML = exposicionesMaxArtistas
+        .map(titulo => `<li>${titulo}</li>`)
+        .join("");
+}
+
+// Función para mostrar exposiciones sin comentarios
+function actualizarExposicionesSinComentarios() {
+    const exposiciones = sistemaMuseo.exposiciones;
+    if (exposiciones.length === 0) {
+        document.querySelector("#sectionInfo ul:last-of-type").innerHTML = "<li>sin datos</li>";
+        return;
+    }
+    
+    // Filtrar exposiciones sin comentarios y ordenar por fecha
+    const exposicionesSinComentarios = exposiciones
+        .filter(expo => expo.comentario.length === 0)
+        .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
+        .map(expo => `${expo.titulo} (${new Date(expo.fecha).toLocaleDateString()})`);
+    
+    // Actualizar la lista en el DOM
+    const lista = document.querySelector("#sectionInfo ul:last-of-type");
+    lista.innerHTML = exposicionesSinComentarios.length > 0
+        ? exposicionesSinComentarios.map(texto => `<li>${texto}</li>`).join("")
+        : "<li>sin datos</li>";
+}
+
+// Función para actualizar la tabla de comentarios
+function actualizarTablaComentarios() {
+    const tabla = document.querySelector("#sectionInfo table");
+    const exposicionFiltro = document.getElementById("exposicionFiltro").value;
+    let comentarios = sistemaMuseo.comentarios;
+    
+    // Aplicar filtro de exposición si no es "todas"
+    if (exposicionFiltro !== "todas") {
+        comentarios = comentarios.filter(c => c.exposicion.titulo === exposicionFiltro);
+    }
+    
+    // Ordenar por calificación
+    comentarios.sort((a, b) => {
+        return ordenAscendente ? 
+            a.calificacion - b.calificacion : 
+            b.calificacion - a.calificacion;
+    });
+    
+    // Limpiar tabla existente (excepto el encabezado)
+    while (tabla.rows.length > 1) {
+        tabla.deleteRow(1);
+    }
+    
+    // Si no hay comentarios, mostrar mensaje
+    if (comentarios.length === 0) {
+        const row = tabla.insertRow();
+        const cell = row.insertCell();
+        cell.colSpan = 6;
+        cell.textContent = "No hay comentarios para mostrar";
+        return;
+    }
+    
+    // Agregar filas de comentarios
+    comentarios.forEach(comentario => {
+        const row = tabla.insertRow();
+        
+        // Título
+        const cellTitulo = row.insertCell();
+        cellTitulo.textContent = comentario.exposicion.titulo;
+        
+        // Más datos
+        const cellMasDatos = row.insertCell();
+        const btnAmpliar = document.createElement("button");
+        btnAmpliar.textContent = "Ampliar";
+        btnAmpliar.className = "button";
+        btnAmpliar.onclick = () => mostrarDetallesExposicion(comentario.exposicion);
+        cellMasDatos.appendChild(btnAmpliar);
+        
+        // Nombre
+        const cellNombre = row.insertCell();
+        cellNombre.textContent = comentario.nombreVisitante;
+        cellNombre.className = "borderRight";
+        
+        // Comentario
+        const cellComentario = row.insertCell();
+        cellComentario.textContent = comentario.comentario;
+        cellComentario.className = "comentarios";
+        
+        // Guiada
+        const cellGuiada = row.insertCell();
+        cellGuiada.textContent = comentario.guia ? "Sí" : "No";
+        
+        // Calificación
+        const cellCalificacion = row.insertCell();
+        cellCalificacion.textContent = comentario.calificacion;
+        cellCalificacion.className = "borderRight";
+    });
+}
+
+// Función para mostrar detalles de una exposición
+function mostrarDetallesExposicion(exposicion) {
+    let detalles = `
+        Título: ${exposicion.titulo}
+        Fecha: ${new Date(exposicion.fecha).toLocaleDateString()}
+        Descripción: ${exposicion.descripcion}
+        
+        Artistas:
+        ${exposicion.artistas.join('\n')}
+    `;
+    alert(detalles);
+}
+
+// Event Listeners
+document.addEventListener("DOMContentLoaded", function() {
+    // Botón de agregar comentario
+    document.getElementById("botonAgregarComentario").addEventListener("click", agregarComentario);
+    
+    // Cambio en el filtro de exposiciones
+    document.getElementById("exposicionFiltro").addEventListener("change", actualizarTablaComentarios);
+    
+    // Botón de ordenar por calificación
+    const btnOrdenar = document.querySelector("#sectionInfo table th:last-child button");
+    btnOrdenar.addEventListener("click", function() {
+        ordenAscendente = !ordenAscendente;
+        this.textContent = ordenAscendente ? "Calificación creciente" : "Calificación decreciente";
+        actualizarTablaComentarios();
+    });
+});

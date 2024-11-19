@@ -35,7 +35,6 @@ function agregarArtista(){
 
     // Validar
     if (!nombre || !edad || !caracteristica) {
-        alert("Por favor, completa todos los campos.");
         return;
     }
 
@@ -99,7 +98,6 @@ function agregarExposicion(){
     
     // Validaciones
     if (!titulo || !fecha || !descripcion || listaArtistas2.options.length === 0) {
-        alert("Por favor, complete todos los campos y seleccione al menos un artista.");
         return;
     }
     
@@ -162,7 +160,6 @@ function agregarComentario() {
     
     // Validaciones
     if (!exposicionTitulo || !nombreVisitante || !comentarioTexto) {
-        alert("Por favor, complete todos los campos.");
         return;
     }
     

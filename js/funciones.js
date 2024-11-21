@@ -16,6 +16,7 @@ function inicio() {
     document.getElementById('formIngresarExposiciones').addEventListener('submit', function (e) {
         e.preventDefault()
         agregarExposicion()
+
     })
     
     document.getElementById('formRegistrarArtistas').addEventListener('submit', function (e) {
@@ -35,7 +36,6 @@ function inicio() {
     actualizarListaExposiciones();
     actualizarTablaComentarios();
 }
-
 
 let colorOriginal = true;
 function cambiarColores(){
@@ -130,9 +130,12 @@ function agregarExposicion(){
         document.getElementById('idListaArtistas2').innerHTML = ''; // Vaciar la lista de artistas seleccionados
         actualizarListaExposiciones(); // Actualizar la lista de exposiciones
         actualizarInformacionGeneral(); // Actualizar información general
+        actualizarListasArtistas(); // Actualizar select de elegir artista
     } else {
         alert('No se pudo agregar la exposición. Intenta nuevamente.');
     }
+
+
 }
 
 function agregarComentario() {
@@ -272,7 +275,6 @@ function ordenarPorCalificacion() {
     // Actualizar la tabla con los datos ordenados
     actualizarTablaComentarios();
 }
-
 
 // function actualizarTablaComentarios() {
 //     let tabla = document.querySelector('table');

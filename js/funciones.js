@@ -61,10 +61,11 @@ function agregarArtista(){
     let caracteristica = document.getElementById('caracteristica').value;
 
     // Verificar si todos los campos están completos
+    /*
     if (!nombre || isNaN(edad) || !caracteristica) {
         alert('Por favor, completa todos los campos correctamente.');
         return;
-    }
+    }*/
 
     let artista = new Artista(nombre, edad, caracteristica);
 
@@ -72,7 +73,7 @@ function agregarArtista(){
         document.getElementById('formRegistrarArtistas').reset(); // Limpiar el formulario
         actualizarListasArtistas(); // Actualizar listas
     } else {
-        alert('No se pudo agregar el artista. Intenta nuevamente.');
+        alert('El artista ya existe. Intenta nuevamente.');
     }
 }
 
@@ -117,11 +118,11 @@ function agregarExposicion(){
             }
         }
     }
-
+/*
     if (!titulo || !fecha || !descripcion || artistas.length === 0) {
         alert('Por favor, completa todos los campos y selecciona al menos un artista.');
         return;
-    }
+    }*/
 
     let exposicion = new Exposicion(titulo, fecha, descripcion, artistas);
    
@@ -131,7 +132,7 @@ function agregarExposicion(){
         actualizarListaExposiciones(); // Actualizar la lista de exposiciones
         actualizarInformacionGeneral(); // Actualizar información general
     } else {
-        alert('No se pudo agregar la exposición. Intenta nuevamente.');
+        alert('La exposición ya existe, intenta nuevamente.');
     }
 }
 
@@ -143,11 +144,11 @@ function agregarComentario() {
     let comentario = document.getElementById('comentario').value;
     let calificacion = document.querySelector('input[name="calificacion"]:checked').value;
     let guiada = document.getElementById('guia').checked;
-
+/*
     if(!exposicionSelect || !nombreVisitante || !calificacion) {
         alert('Por favor, completa todos los campos y selecciona al menos un artista.');
         return
-    }
+    }*/
 
     let visita = new Visita(exposicion, nombreVisitante, comentario, calificacion, guiada);
 
@@ -155,9 +156,9 @@ function agregarComentario() {
         document.getElementById('formComentariosDeVisitas').reset();
         actualizarTablaComentarios();
         actualizarInformacionGeneral();
-    } else {
+    } /*else {
         alert('No se pudo agregar la exposición. Intenta nuevamente.')
-    }
+    }*/
 }
 
 function actualizarListasArtistas() {

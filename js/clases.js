@@ -26,7 +26,11 @@ class Sistema {
     }
 
     agregarVisita(visita) {
+        if (!visita || !visita.exposicion || !visita.nombreVisitante) {
+            return false; // Visita inválida
+        }
         this.visitas.push(visita);
+        return true; // Visita agregada exitosamente
     }
 
     obtenerExposicionesSinComentarios() {

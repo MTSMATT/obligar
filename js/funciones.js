@@ -27,6 +27,8 @@ function inicio() {
     document.getElementById('moverArtistaDerecha').addEventListener('click', moverArtistaDerecha);
     document.getElementById('moverArtistaIzquierda').addEventListener('click', moverArtistaIzquierda);
     
+    document.getElementById('tableButton').addEventListener('click', ordenarPorCalificacion);
+
     actualizarListasArtistas();
     actualizarListaExposiciones();
 }
@@ -184,16 +186,17 @@ function actualizarListaExposiciones() {
 
 // Función para actualizar la información general
 function actualizarInformacionGeneral() {
+ 
     let exposicionesMasArtistas = sistema.obtenerExposicionesConMasArtistas();
     let listaMasArtistas = document.querySelector('#sectionInfo ul:first-of-type');
     listaMasArtistas.innerHTML = '';
     
     if (exposicionesMasArtistas.length > 0) {
-        for (let i = 0; i < exposicionesMasArtistas.length; i++) {
+        exposicionesMasArtistas.forEach((expo) => {
             let li = document.createElement('li');
-            li.textContent = exposicionesMasArtistas[i].titulo;
+            li.textContent = expo.titulo;
             listaMasArtistas.appendChild(li);
-        }
+        });
     } else {
         let li = document.createElement('li');
         li.textContent = 'sin datos';
@@ -204,18 +207,53 @@ function actualizarInformacionGeneral() {
     let exposicionesSinComentarios = sistema.obtenerExposicionesSinComentarios();
     let listaSinComentarios = document.querySelector('#sectionInfo ul:nth-of-type(2)');
     listaSinComentarios.innerHTML = '';
-    
+
     if (exposicionesSinComentarios.length > 0) {
-        for (let i = 0; i < exposicionesSinComentarios.length; i++) {
+        exposicionesSinComentarios.forEach((expo) => {
             let li = document.createElement('li');
-            li.textContent = exposicionesSinComentarios[i].titulo + ' - ' + exposicionesSinComentarios[i].fecha;
+            li.textContent = `${expo.titulo} (${expo.fecha})`;
             listaSinComentarios.appendChild(li);
-        }
+        });
     } else {
         let li = document.createElement('li');
         li.textContent = 'sin datos';
         listaSinComentarios.appendChild(li);
     }
+}
+
+function obtenerImagenCalificacion(calificacion) {
+    const rutasImagenes = {
+        1: 'img/red.jpg',       // Muy baja
+        2: 'img/orange.jpg',    // Baja
+        3: 'img/yellow.jpg',    // Media
+        4: 'img/lightgreen.jpg', // Buena
+        5: 'img/green.jpg',     // Excelente
+    };
+
+    let img = document.createElement('img');
+    img.src = rutasImagenes[calificacion];
+    img.alt = `Calificación ${calificacion}`;
+    img.className = 'imagen'; // Clase para asegurar que las imágenes sean consistentes con las del formulario
+    return img;
+}
+
+let ordenCreciendo = true; // Variable para controlar si el orden es creciente o decreciente
+function ordenarPorCalificacion() {
+    // Cambiar el orden de las visitas de acuerdo con el valor de ordenCreciendo
+ 
+    sistema.ordenarVisitasPorCalificacion(ordenCreciendo)
+
+    // Cambiar el texto del botón según el estado de la variable ordenCreciendo
+    const botonCalificacion = document.getElementById('tableButton');
+    botonCalificacion.innerText = ordenCreciendo
+        ? 'Calificación decreciente'
+        : 'Calificación creciente';
+
+    // Alternar el estado de ordenCreciendo
+    ordenCreciendo = !ordenCreciendo;
+
+    // Actualizar la tabla con los datos ordenados
+    actualizarTablaComentarios();
 }
 
 
@@ -228,37 +266,45 @@ function actualizarTablaComentarios() {
         tabla.deleteRow(1);
     }
 
-    for (let i = 0; i < sistema.visitas.length; i++) {
+    sistema.visitas.forEach((visita) => {
         let fila = tabla.insertRow();
-        
-        let celdaTitulo = fila.insertCell();
-        celdaTitulo.textContent = sistema.visitas[i].exposicion.titulo;
 
+        // Columna: Título
+        let celdaTitulo = fila.insertCell();
+        celdaTitulo.textContent = visita.exposicion.titulo;
+
+        // Columna: Más datos
         let celdaAmpliar = fila.insertCell();
         let botonAmpliar = document.createElement('button');
         botonAmpliar.textContent = 'Ampliar';
         botonAmpliar.className = 'button';
-        botonAmpliar.onclick = function() {
-            alert('Título: ' + sistema.visitas[i].exposicion.titulo + 
-                  '\nFecha: ' + sistema.visitas[i].exposicion.fecha + 
-                  '\nDescripción: ' + sistema.visitas[i].exposicion.descripcion + 
-                  '\nArtistas: ' + sistema.visitas[i].exposicion.artistas.map(a => a.nombre).join(', '));
+        botonAmpliar.onclick = function (event) {
+            event.preventDefault(); // Prevenir refresco
+            alert(`Título: ${visita.exposicion.titulo}
+                Fecha: ${visita.exposicion.fecha}
+                Descripción: ${visita.exposicion.descripcion}
+                Artistas: ${visita.exposicion.artistas.map((a) => a.nombre).join(', ')}`);
         };
         celdaAmpliar.appendChild(botonAmpliar);
 
+        // Columna: Nombre
         let celdaNombre = fila.insertCell();
-        celdaNombre.textContent = sistema.visitas[i].nombreVisitante;
+        celdaNombre.textContent = visita.nombreVisitante;
         celdaNombre.className = 'borderRight';
 
+        // Columna: Comentario
         let celdaComentario = fila.insertCell();
-        celdaComentario.textContent = sistema.visitas[i].comentario;
+        celdaComentario.textContent = visita.comentario;
         celdaComentario.className = 'comentarios';
 
+        // Columna: Guiada
         let celdaGuiada = fila.insertCell();
-        celdaGuiada.textContent = sistema.visitas[i].guiada ? 'Sí' : 'No';
+        celdaGuiada.textContent = visita.guiada ? 'Sí' : 'No';
 
+        // Columna: Calificación
         let celdaCalificacion = fila.insertCell();
-        celdaCalificacion.textContent = sistema.visitas[i].calificacion;
+        let imagenCalificacion = obtenerImagenCalificacion(visita.calificacion);
+        celdaCalificacion.appendChild(imagenCalificacion);
         celdaCalificacion.className = 'borderRight';
-    }
+    });
 }

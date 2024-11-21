@@ -78,6 +78,14 @@ class Sistema {
         }
         return exposiciones;
     }
+
+    ordenarVisitasPorCalificacion(ordenCreciendo) {
+        this.visitas.sort((a ,b) => {
+            return ordenCreciendo
+                ? a.calificacion - b.calificacion // Orden creciente
+                : b.calificacion - a.calificacion // Orden decreceinte
+        })
+    }
 }
 
 class Artista {

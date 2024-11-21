@@ -29,8 +29,11 @@ function inicio() {
     
     document.getElementById('tableButton').addEventListener('click', ordenarPorCalificacion);
 
+    document.getElementById('exposicionFiltro').addEventListener('change', filtrarTablaPorExposicion);
+ 
     actualizarListasArtistas();
     actualizarListaExposiciones();
+    actualizarTablaComentarios();
 }
 
 
@@ -166,7 +169,20 @@ function actualizarListasArtistas() {
         option.text = sistema.artistas[i].nombre;
         lista1.add(option);
     }
+}   
+
+function filtrarTablaPorExposicion() {
+    const filtro = document.getElementById('exposicionFiltro').value;
+    
+    // Filtrar las visitas según el filtro seleccionado
+    const visitasFiltradas = filtro === 'todas' 
+        ? sistema.visitas 
+        : sistema.visitas.filter(visita => visita.exposicion.titulo === filtro);
+    
+    // Actualizar la tabla con las visitas filtradas
+    actualizarTablaComentarios(visitasFiltradas);
 }
+
 
 function actualizarListaExposiciones() {
     let selectExposicion = document.getElementById('exposicion');
@@ -179,6 +195,7 @@ function actualizarListaExposiciones() {
         let option2 = document.createElement('option');
         option1.text = sistema.exposiciones[i].titulo;
         option2.text = sistema.exposiciones[i].titulo;
+        
         selectExposicion.add(option1);
         selectFiltro.add(option2);
     }
@@ -257,7 +274,59 @@ function ordenarPorCalificacion() {
 }
 
 
-function actualizarTablaComentarios() {
+// function actualizarTablaComentarios() {
+//     let tabla = document.querySelector('table');
+//     let filas = tabla.getElementsByTagName('tr');
+    
+//     // Eliminar filas existentes excepto el encabezado
+//     while (filas.length > 1) {
+//         tabla.deleteRow(1);
+//     }
+
+//     sistema.visitas.forEach((visita) => {
+//         let fila = tabla.insertRow();
+
+//         // Columna: Título
+//         let celdaTitulo = fila.insertCell();
+//         celdaTitulo.textContent = visita.exposicion.titulo;
+
+//         // Columna: Más datos
+//         let celdaAmpliar = fila.insertCell();
+//         let botonAmpliar = document.createElement('button');
+//         botonAmpliar.textContent = 'Ampliar';
+//         botonAmpliar.className = 'button';
+//         botonAmpliar.onclick = function (event) {
+//             event.preventDefault(); // Prevenir refresco
+//             alert(`Título: ${visita.exposicion.titulo}
+//                 Fecha: ${visita.exposicion.fecha}
+//                 Descripción: ${visita.exposicion.descripcion}
+//                 Artistas: ${visita.exposicion.artistas.map((a) => a.nombre).join(', ')}`);
+//         };
+//         celdaAmpliar.appendChild(botonAmpliar);
+
+//         // Columna: Nombre
+//         let celdaNombre = fila.insertCell();
+//         celdaNombre.textContent = visita.nombreVisitante;
+//         celdaNombre.className = 'borderRight';
+
+//         // Columna: Comentario
+//         let celdaComentario = fila.insertCell();
+//         celdaComentario.textContent = visita.comentario;
+//         celdaComentario.className = 'comentarios';
+
+//         // Columna: Guiada
+//         let celdaGuiada = fila.insertCell();
+//         celdaGuiada.textContent = visita.guiada ? 'Sí' : 'No';
+
+//         // Columna: Calificación
+//         let celdaCalificacion = fila.insertCell();
+//         let imagenCalificacion = obtenerImagenCalificacion(visita.calificacion);
+//         celdaCalificacion.appendChild(imagenCalificacion);
+//         celdaCalificacion.className = 'borderRight';
+//     });
+// }
+
+function actualizarTablaComentarios(visitas = sistema.visitas) {
     let tabla = document.querySelector('table');
     let filas = tabla.getElementsByTagName('tr');
     
@@ -266,7 +335,7 @@ function actualizarTablaComentarios() {
         tabla.deleteRow(1);
     }
 
-    sistema.visitas.forEach((visita) => {
+    visitas.forEach((visita) => {
         let fila = tabla.insertRow();
 
         // Columna: Título

@@ -1,12 +1,12 @@
-let sistema = new Sistema();
+let sistema = new Sistema(); // Creamos la clase sistema antes que nada
 
 window.addEventListener('load', inicio);
 
 function inicio() {
-    // Botones principales
+    // Obtenemos el boton cambiar color y aplicamos la fucnion
     document.getElementById('botonColores').addEventListener('click', cambiarColores);
     
-    // document.getElementById('botonAgregarComentario').addEventListener('click', agregarComentario);
+    // Obtenemos el form de los coments para prevenir la recarga al darle al boton, Luego ejecutamos la funcion agregar comentario
     document.getElementById('formComentariosDeVisitas').addEventListener('submit', function (e) {
         e.preventDefault()
         agregarComentario()
@@ -118,7 +118,7 @@ function agregarExposicion(){
             }
         }
     }
-/*
+    /*
     if (!titulo || !fecha || !descripcion || artistas.length === 0) {
         alert('Por favor, completa todos los campos y selecciona al menos un artista.');
         return;
@@ -147,7 +147,8 @@ function agregarComentario() {
     let comentario = document.getElementById('comentario').value;
     let calificacion = document.querySelector('input[name="calificacion"]:checked').value;
     let guiada = document.getElementById('guia').checked;
-/*
+    
+    /*
     if(!exposicionSelect || !nombreVisitante || !calificacion) {
         alert('Por favor, completa todos los campos y selecciona al menos un artista.');
         return
@@ -159,9 +160,9 @@ function agregarComentario() {
         document.getElementById('formComentariosDeVisitas').reset();
         actualizarTablaComentarios();
         actualizarInformacionGeneral();
-    } /*else {
-        alert('No se pudo agregar la exposición. Intenta nuevamente.')
-    }*/
+    } else {
+        alert('No se pudo agregar la exposición. Intenta nuevamente.') // En caso de errores inesperados
+    }
 }
 
 function actualizarListasArtistas() {
@@ -276,58 +277,6 @@ function ordenarPorCalificacion() {
     // Actualizar la tabla con los datos ordenados
     actualizarTablaComentarios();
 }
-
-// function actualizarTablaComentarios() {
-//     let tabla = document.querySelector('table');
-//     let filas = tabla.getElementsByTagName('tr');
-    
-//     // Eliminar filas existentes excepto el encabezado
-//     while (filas.length > 1) {
-//         tabla.deleteRow(1);
-//     }
-
-//     sistema.visitas.forEach((visita) => {
-//         let fila = tabla.insertRow();
-
-//         // Columna: Título
-//         let celdaTitulo = fila.insertCell();
-//         celdaTitulo.textContent = visita.exposicion.titulo;
-
-//         // Columna: Más datos
-//         let celdaAmpliar = fila.insertCell();
-//         let botonAmpliar = document.createElement('button');
-//         botonAmpliar.textContent = 'Ampliar';
-//         botonAmpliar.className = 'button';
-//         botonAmpliar.onclick = function (event) {
-//             event.preventDefault(); // Prevenir refresco
-//             alert(`Título: ${visita.exposicion.titulo}
-//                 Fecha: ${visita.exposicion.fecha}
-//                 Descripción: ${visita.exposicion.descripcion}
-//                 Artistas: ${visita.exposicion.artistas.map((a) => a.nombre).join(', ')}`);
-//         };
-//         celdaAmpliar.appendChild(botonAmpliar);
-
-//         // Columna: Nombre
-//         let celdaNombre = fila.insertCell();
-//         celdaNombre.textContent = visita.nombreVisitante;
-//         celdaNombre.className = 'borderRight';
-
-//         // Columna: Comentario
-//         let celdaComentario = fila.insertCell();
-//         celdaComentario.textContent = visita.comentario;
-//         celdaComentario.className = 'comentarios';
-
-//         // Columna: Guiada
-//         let celdaGuiada = fila.insertCell();
-//         celdaGuiada.textContent = visita.guiada ? 'Sí' : 'No';
-
-//         // Columna: Calificación
-//         let celdaCalificacion = fila.insertCell();
-//         let imagenCalificacion = obtenerImagenCalificacion(visita.calificacion);
-//         celdaCalificacion.appendChild(imagenCalificacion);
-//         celdaCalificacion.className = 'borderRight';
-//     });
-// }
 
 function actualizarTablaComentarios(visitas = sistema.visitas) {
     let tabla = document.querySelector('table');

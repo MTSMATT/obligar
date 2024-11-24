@@ -163,6 +163,9 @@ function agregarComentario() {
     } else {
         alert('No se pudo agregar la exposición. Intenta nuevamente.') // En caso de errores inesperados
     }
+
+    console.log(sistema.exposiciones)
+    console.log(sistema.visitas)
 }
 
 function actualizarListasArtistas() {

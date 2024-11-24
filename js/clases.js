@@ -1,20 +1,24 @@
 class Sistema {
     constructor() {
-        this.artistas = [];
-        this.exposiciones = [];
-        this.visitas = [];
+        this.artistas = []; // guarda todos los artistas
+        this.exposiciones = []; // guarda todas las expos 
+        this.visitas = []; // guarda todas las visitas
     }
 
+    // Metodo para agregar nuevos artistas
     agregarArtista(artista) {
+
+        // Chekeamos que no este ya en el array
         for (let i = 0; i < this.artistas.length; i++) {
             if (this.artistas[i].nombre === artista.nombre) {
                 return false;
             }
         }
-        this.artistas.push(artista);
-        return true;
+        this.artistas.push(artista); // Agreagamos al array
+        return true; // Funcion exitosa (por defecto retorna undefine)
     }
 
+    // Metodo para agregar nueva expo
     agregarExposicion(exposicion) {
         for (let i = 0; i < this.exposiciones.length; i++) {
             if (this.exposiciones[i].titulo === exposicion.titulo) {
@@ -25,6 +29,7 @@ class Sistema {
         return true;
     }
 
+    // Metodo para agregar nueva visita
     agregarVisita(visita) {
         if (!visita || !visita.exposicion || !visita.nombreVisitante) {
             return false; // Visita inválida
@@ -33,20 +38,29 @@ class Sistema {
         return true; // Visita agregada exitosamente
     }
 
+    // Buscar expos sin comentarios
     obtenerExposicionesSinComentarios() {
         let resultado = [];
+
+        // Revisamos cada expo
         for (let i = 0; i < this.exposiciones.length; i++) {
             let tieneComentarios = false;
+            
+            // Buscamos si tiene visita
             for (let j = 0; j < this.visitas.length; j++) {
                 if (this.visitas[j].exposicion === this.exposiciones[i]) {
                     tieneComentarios = true;
                     break;
                 }
             }
+
+            // Si no tiene comentatiso la agregamos a resultado
             if (!tieneComentarios) {
                 resultado.push(this.exposiciones[i]);
             }
         }
+
+        // Retornamos llamando al metodo para ordenar por fecha
         return this.ordenarPorFecha(resultado);
     }
 

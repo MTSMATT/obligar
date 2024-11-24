@@ -132,9 +132,9 @@ function agregarExposicion(){
         actualizarListaExposiciones(); // Actualizar la lista de exposiciones
         actualizarInformacionGeneral(); // Actualizar información general
         actualizarListasArtistas(); // Actualizar select de elegir artista
-    } else {
+    } /*else {
         alert('La exposición ya existe, intenta nuevamente.');
-    }
+    }*/
 
 
 }

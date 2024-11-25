@@ -8,3 +8,4 @@
     - artista 1... (orden alfabetico)
 - Agregar comentarios con nombres de nostros en todos los archivos
 - Chequear no agreagar expo con el mismo titulo
+- Si no hay datos en la tabla poner sin datos (creo)

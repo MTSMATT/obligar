@@ -281,7 +281,7 @@ function ordenarPorCalificacion() {
     actualizarTablaComentarios();
 }
 
-function actualizarTablaComentarios(visitas = sistema.visitas) {
+function actualizarTablaComentarios() {
     let tabla = document.querySelector('table');
     let filas = tabla.getElementsByTagName('tr');
     
@@ -290,7 +290,7 @@ function actualizarTablaComentarios(visitas = sistema.visitas) {
         tabla.deleteRow(1);
     }
 
-    visitas.forEach((visita) => {
+    sistema.visitas.forEach((visita) => {
         let fila = tabla.insertRow();
 
         // Columna: Título

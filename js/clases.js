@@ -42,11 +42,11 @@ class Sistema {
     obtenerExposicionesSinComentarios() {
         let resultado = [];
 
-        // Revisamos cada expo
+        // Recorremos las expos
         for (let i = 0; i < this.exposiciones.length; i++) {
             let tieneComentarios = false;
             
-            // Buscamos si tiene visita
+            // Buscamos en cada VISITA la expo vinculada y la comparamos con la expo del array
             for (let j = 0; j < this.visitas.length; j++) {
                 if (this.visitas[j].exposicion === this.exposiciones[i]) {
                     tieneComentarios = true;
@@ -68,11 +68,17 @@ class Sistema {
         let maxArtistas = 0;
         let resultado = [];
 
+        // Recorremos las expos
         for (let i = 0; i < this.exposiciones.length; i++) {
+            // Guardamos el numero de artistas de la expo
             let cantidadArtistas = this.exposiciones[i].artistas.length;
+
+            // Nos vamos quedando con el mayor
             if (cantidadArtistas > maxArtistas) {
                 maxArtistas = cantidadArtistas;
                 resultado = [this.exposiciones[i]];
+
+            // Si hay varios con la misma cantidad tambien lo mostramos 
             } else if (cantidadArtistas === maxArtistas) {
                 resultado.push(this.exposiciones[i]);
             }
@@ -80,6 +86,7 @@ class Sistema {
         return resultado;
     }
 
+    // Ordenamos las expos sin comentarios
     ordenarPorFecha(exposiciones) {
         for (let i = 0; i < exposiciones.length - 1; i++) {
             for (let j = 0; j < exposiciones.length - i - 1; j++) {

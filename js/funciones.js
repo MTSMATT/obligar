@@ -1,3 +1,5 @@
+//Trabajo de Matias Piedra (354007) & Joaquin Piedra (304804)
+
 let sistema = new Sistema(); // Creamos la clase sistema antes que nada
 
 window.addEventListener('load', inicio);
@@ -132,9 +134,9 @@ function agregarExposicion(){
         actualizarListaExposiciones(); // Actualizar la lista de exposiciones
         actualizarInformacionGeneral(); // Actualizar información general
         actualizarListasArtistas(); // Actualizar select de elegir artista
-    } /*else {
+    } else {
         alert('La exposición ya existe, intenta nuevamente.');
-    }*/
+    }
 
 
 }
@@ -343,7 +345,7 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
 
         // Columna: Guiada
         let celdaGuiada = fila.insertCell();
-        celdaGuiada.textContent = visita.guiada ? 'Sí' : 'No';
+        celdaGuiada.textContent = visita.guiada ? 'SI' : 'NO';
 
         // Columna: Calificación
         let celdaCalificacion = fila.insertCell();

@@ -1,3 +1,5 @@
+//Trabajo de Matias Piedra (354007) & Joaquin Piedra (304804)
+
 class Sistema {
     constructor() {
         this.artistas = []; // guarda todos los artistas

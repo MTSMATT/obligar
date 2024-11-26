@@ -1,14 +1,13 @@
 - El select tiene que estar en orden alfabetico.
 - El select de la exposicion tiene que estar en orden alfabetico.
-- Sacar bold en tabla y Informacion general
 - En ampliar deberia aparecer:
     - Informacion de la Exposision
     - Fecha: 12/12/1222
     - Descripcion: papapapa...
     - Artistas:
     - artista 1... (orden alfabetico)
-
-- Si no hay datos en la tabla poner sin datos (creo)
+- 
+- Chequear la rubrica si está todo OK
 
 - Filtro de la tabla no anda
 - Alert de ampliar
@@ -20,3 +19,4 @@
 -LISTO- SI/NO de la tabla van en mayúsculas
 -LISTO- Agregar comentarios con nombres de nostros en todos los archivos
 -LISTO- Chequear no agreagar expo con el mismo titulo
+-LISTO- Sacar bold en tabla y Informacion general

@@ -306,11 +306,9 @@ function actualizarTablaComentarios() {
         botonAmpliar.className = 'button';
         botonAmpliar.onclick = function (event) {
             event.preventDefault(); // Prevenir refresco
-            alert(`Título: ${visita.exposicion.titulo}
-                Fecha: ${visita.exposicion.fecha}
-                Descripción: ${visita.exposicion.descripcion}
-                Artistas: ${visita.exposicion.artistas.map((a) => a.nombre).join(', ')}`);
+            alert(`Información de la Exposición:\nFecha: ${visita.exposicion.fecha}\nDescripción: ${visita.exposicion.descripcion}\nArtistas:\n${visita.exposicion.artistas.nombre} + `);
         };
+
         celdaAmpliar.appendChild(botonAmpliar);
 
         // Columna: Nombre

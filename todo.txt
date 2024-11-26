@@ -10,10 +10,11 @@
 - Chequear no agreagar expo con el mismo titulo
 - Si no hay datos en la tabla poner sin datos (creo)
 
-- Filtro de la tabla
+- Filtro de la tabla no anda
 - Alert de ampliar
 - Boton creciente
--LISTO- SI/NO de la tabla van en mayúsculas
 - Orden alfabetico de select y exposiciones
 - Agregar artista simplemente seleccionándolo aunque esté en el select de la izquierda
 - Probar en la compu del laboratorio
+
+-LISTO- SI/NO de la tabla van en mayúsculas

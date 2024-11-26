@@ -1,3 +1,5 @@
+//Trabajo de Matias Piedra (354007) & Joaquin Piedra (304804)
+
 let sistema = new Sistema(); // Creamos la clase sistema antes que nada
 
 window.addEventListener('load', inicio);

@@ -174,9 +174,16 @@ function actualizarListasArtistas() {
     let lista1 = document.getElementById('idListaArtistas1');
     lista1.innerHTML = '';
     
+    // sortedArtistas = sistema.artistas.sort((a, b) => a.nombre.localeCompare(b.nombre))
+    let sortedArtistas = sistema.artistas.sort((a, b) => {
+        if (a.nombre < b.nombre) return -1;
+        if (a.nombre > b.nombre) return 1;
+        return 0;
+    });
+
     for (let i = 0; i < sistema.artistas.length; i++) {
         let option = document.createElement('option');
-        option.text = sistema.artistas[i].nombre;
+        option.text = sortedArtistas[i].nombre;
         lista1.add(option);
     }
 }   
@@ -184,15 +191,22 @@ function actualizarListasArtistas() {
 function filtrarTablaPorExposicion() {
     const filtro = document.getElementById('exposicionFiltro').value;
     
-    // Filtrar las visitas según el filtro seleccionado
-    const visitasFiltradas = filtro === 'todas' 
-        ? sistema.visitas 
-        : sistema.visitas.filter(visita => visita.exposicion.titulo === filtro);
-    
+    let visitasFiltradas = []
+
+    if (filtro === 'todas') {
+        visitasFiltradas = sistema.visitas;  // No es necesario hacer nada más si seleccionan 'todas'
+    } else {
+        // Filtrar las visitas que coincidan con el filtro
+        for (let i = 0; i < sistema.visitas.length; i++) {
+            if (sistema.visitas[i].exposicion.titulo === filtro) {
+                visitasFiltradas.push(sistema.visitas[i]);  // Agregar la visita al arreglo
+            }
+        }
+    }
+
     // Actualizar la tabla con las visitas filtradas
     actualizarTablaComentarios(visitasFiltradas);
 }
-
 
 function actualizarListaExposiciones() {
     let selectExposicion = document.getElementById('exposicion');
@@ -200,11 +214,17 @@ function actualizarListaExposiciones() {
     selectExposicion.innerHTML = '';
     selectFiltro.innerHTML = '<option value="todas">Todas</option>';
     
+    let exposicionesSorted = sistema.exposiciones.sort((a, b) => {
+        if (a.titulo < b.titulo) return -1;
+        if (a.titulo > b.titulo) return 1;
+        return 0;
+    })
+
     for (let i = 0; i < sistema.exposiciones.length; i++) {
         let option1 = document.createElement('option');
         let option2 = document.createElement('option');
-        option1.text = sistema.exposiciones[i].titulo;
-        option2.text = sistema.exposiciones[i].titulo;
+        option1.text = exposicionesSorted[i].titulo;
+        option2.text = exposicionesSorted[i].titulo;
         
         selectExposicion.add(option1);
         selectFiltro.add(option2);
@@ -283,7 +303,7 @@ function ordenarPorCalificacion() {
     actualizarTablaComentarios();
 }
 
-function actualizarTablaComentarios() {
+function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto vale sistema.visitas, si se para un parametro se usa ese
     let tabla = document.querySelector('table');
     let filas = tabla.getElementsByTagName('tr');
     
@@ -292,7 +312,7 @@ function actualizarTablaComentarios() {
         tabla.deleteRow(1);
     }
 
-    sistema.visitas.forEach((visita) => {
+    visitas.forEach((visita) => {
         let fila = tabla.insertRow();
 
         // Columna: Título

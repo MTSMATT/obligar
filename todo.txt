@@ -1,4 +1,3 @@
-- El select tiene que estar en orden alfabetico.
 - Sacar bold en tabla y Informacion general
 - En ampliar deberia aparecer:
     - Informacion de la Exposision
@@ -8,4 +7,4 @@
     - artista 1... (orden alfabetico)
 - Agregar comentarios con nombres de nostros en todos los archivos
 - Chequear no agreagar expo con el mismo titulo
-- Si no hay datos en la tabla poner sin datos (creo)
+- Chequear el ordenador de visitas

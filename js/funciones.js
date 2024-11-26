@@ -323,7 +323,7 @@ function actualizarTablaComentarios() {
 
         // Columna: Guiada
         let celdaGuiada = fila.insertCell();
-        celdaGuiada.textContent = visita.guiada ? 'Sí' : 'No';
+        celdaGuiada.textContent = visita.guiada ? 'SI' : 'NO';
 
         // Columna: Calificación
         let celdaCalificacion = fila.insertCell();

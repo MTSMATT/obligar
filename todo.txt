@@ -17,6 +17,8 @@
 - Agregar artista simplemente seleccionándolo aunque esté en el select de la izquierda
 - Probar en la compu del laboratorio
 
+- Chequear la funcion del sort en la tabla 
+
 -LISTO- SI/NO de la tabla van en mayúsculas
 -LISTO- Agregar comentarios con nombres de nostros en todos los archivos
 -LISTO- Chequear no agreagar expo con el mismo titulo

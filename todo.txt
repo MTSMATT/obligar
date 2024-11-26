@@ -1,4 +1,5 @@
 - El select tiene que estar en orden alfabetico.
+- El select de la exposicion tiene que estar en orden alfabetico.
 - Sacar bold en tabla y Informacion general
 - En ampliar deberia aparecer:
     - Informacion de la Exposision

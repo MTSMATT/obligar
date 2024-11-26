@@ -101,14 +101,11 @@ header {
     height: 92px;
     border: 2px solid #aaa;
     border-radius: 4px;
-} .listaArtistas option {
-    font-weight: bold;
 }
 
 
 
 #exposicion {
-    font-weight: bold;
     width: 200px;
 }
 
@@ -117,12 +114,12 @@ header {
 .button {
     background-color: #4caf50;
     color: #fff;
-    font-weight: bold;
     padding: 7px 12px;
     cursor: pointer;
     border-radius: 4px;
     border: 2px solid transparent;
     border-color: #4caf50 #409044 #409044 #4caf50; 
+    font-size: 15px;
 } .button:hover {
     background-color: #5ac55e;
     border-color: #5ac55e #4caf50 #4caf50 #5ac55e; 
@@ -173,7 +170,7 @@ header {
 #sectionInfo {
     background-color: #98fb98;
     margin: 20px 48px;
-    font-weight: bold;
+    font-weight: normal;
     padding: 24px 28px;
     border-radius: 30px;
 } #sectionInfo > h2 {
@@ -190,12 +187,12 @@ h3, h2 {
 #sectionInfo ul {
     list-style-type: square;
     margin: 18px 38px;
+    font-weight: normal;
 } #sectionInfo form label {
     display: block;
     margin-bottom: 8px;
     padding: 0;
 } #sectionInfo form select {
-    font-weight: bold;
     padding-right: 8px;
     margin-bottom: 32px;
 } #sectionInfo table {
@@ -216,10 +213,13 @@ h3, h2 {
     outline-offset: -2px;
 } #sectionInfo th {
     background-color: #f2f2f2;
+    font-weight: bold;
 } #sectionInfo table th:last-child {
     max-width: 150px;
 } #sectionInfo table button {
-    padding: 5px;
+    padding: 5px 12px;
+} #sectionInfo p{
+    font-weight: bold;
 }
 
 #sectionInfo #exposicionFiltro{

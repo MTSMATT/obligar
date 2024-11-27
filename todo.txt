@@ -6,14 +6,14 @@
     la tabla se reinicia y muestra a todos los comentarios de forma creciente, cuando deberia mostrar solo los filtrados.
 - Al pasar un artista del select der al izq y volver a pasarlo, el artista se suma úlitmo en la lista, 
     cuando debería actualizarse toda la lista alfabeticamente
-- El formato de la fecha en la seccion informacion general es (2024-04-24), cuando deberia ser 24/04/2024
-- El formato de la fecha del alert ampliar es 2024-03-10 cuando debería ser 10/03/2024
-- Boton: Al presionar "Calificación creciente " se cambia el texto a “Calificación decreciente” o viceversa, ordenando según el texto
 - Borrar codigo comentado
 - Agregar comentarios con claude/gpt
 - Chequear la funcion del sort en la tabla 
 
 
+-LISTO- El formato de la fecha en la seccion informacion general es (2024-04-24), cuando deberia ser 24/04/2024
+-LISTO- El formato de la fecha del alert ampliar es 2024-03-10 cuando debería ser 10/03/2024
+-LISTO- Boton: Al presionar "Calificación creciente " se cambia el texto a “Calificación decreciente” o viceversa, ordenando según el texto
 -LISTO- Alert de ampliar, arreglar que muestre los artistas con nombre, edad y estilo. cada artista en una linea distinta ordenados alfabeticamente.
 -LISTO- Probar en la compu del laboratorio
 -LISTO- Filtro de la tabla no anda

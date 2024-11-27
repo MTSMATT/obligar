@@ -264,7 +264,9 @@ function actualizarInformacionGeneral() {
     if (exposicionesSinComentarios.length > 0) {
         exposicionesSinComentarios.forEach((expo) => {
             let li = document.createElement('li');
-            li.textContent = `${expo.titulo} (${expo.fecha})`;
+            let [yyyy, mm, dd] = (expo.fecha).split('-'); // Dividir la fecha en partes y asignarlo al array. Formato default es "YYYY-MM-DD"
+            let fechaFormato = `${dd}/${mm}/${yyyy}`; // Cambiar el formato de la fecha.
+            li.textContent = `${expo.titulo} ${fechaFormato}`;
             listaSinComentarios.appendChild(li);
         });
     } else {
@@ -340,7 +342,10 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
 
             artistasInfo = artistasInfo.replace(/\n\s*\n/g, '\n'); // Eliminar líneas vacías
 
-            alert(`Información de la Exposición:\nFecha: ${visita.exposicion.fecha}\nDescripción: ${visita.exposicion.descripcion}\nArtistas:\n${artistasInfo}`); // Mostrar alerta con la información
+            let [yyyy, mm, dd] = (visita.exposicion.fecha).split('-'); // Dividir la fecha en partes y asignarlo al array. Formato default es "YYYY-MM-DD"
+            let fechaFormato = `${dd}/${mm}/${yyyy}`; // Cambiar el formato de la fecha.
+
+            alert(`Información de la Exposición:\nFecha: ${fechaFormato}\nDescripción: ${visita.exposicion.descripcion}\nArtistas:\n${artistasInfo}`); // Mostrar alerta con la información
         };
 
         celdaAmpliar.appendChild(botonAmpliar);

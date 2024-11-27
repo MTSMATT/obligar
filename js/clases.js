@@ -10,7 +10,7 @@ class Sistema {
     // Metodo para agregar nuevos artistas
     agregarArtista(artista) {
 
-        // Chekeamos que no este ya en el array
+        // Chequeamos que no este ya en el array
         for (let i = 0; i < this.artistas.length; i++) {
             if (this.artistas[i].nombre === artista.nombre) {
                 return false;

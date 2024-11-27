@@ -165,8 +165,6 @@ header {
     margin: 0 15px;
 }
 
-/* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
-
 #sectionInfo {
     background-color: #98fb98;
     margin: 20px 48px;
@@ -183,6 +181,7 @@ header {
 h3, h2 {
     font-size: 25px;
 }
+
 
 #sectionInfo ul {
     list-style-type: square;
@@ -218,7 +217,7 @@ h3, h2 {
     max-width: 150px;
 } #sectionInfo table button {
     padding: 5px 12px;
-} #sectionInfo p{
+} #sectionInfo p, label{
     font-weight: bold;
 }
 

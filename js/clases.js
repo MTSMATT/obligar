@@ -88,19 +88,20 @@ class Sistema {
         return resultado;
     }
 
+    // Ordenar los select de las exposiciones
+    ordenarExposicionesAlfabeticamente() {
+        return this.exposiciones.sort((a, b) => {
+            if (a.titulo < b.titulo) return -1;
+            if (a.titulo > b.titulo) return 1;
+            return 0;
+        })
+    }
+
     // Ordenamos las expos sin comentarios
     ordenarPorFecha(exposiciones) {
 
         // Con el objeto Date ordenamos por fecha
         return exposiciones.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
-    }
-
-    ordenarVisitasPorCalificacion(ordenCreciendo) {
-        this.visitas.sort((a ,b) => {
-            return ordenCreciendo
-                ? a.calificacion - b.calificacion // Orden creciente
-                : b.calificacion - a.calificacion // Orden decreceinte
-        })
     }
 }
 

@@ -12,6 +12,8 @@ function inicio() {
     document.getElementById('formComentariosDeVisitas').addEventListener('submit', function (e) {
         e.preventDefault()
         agregarComentario()
+        ordenarPorCalificacion()
+        ordenCreciendo = true;
     })
     
     // document.getElementById('botonAgregarExposicion').addEventListener('click', agregarExposicion);
@@ -273,7 +275,9 @@ function actualizarInformacionGeneral() {
 
         for (let i = 0 ; i < exposicionesSinComentarios.length; i++) {
             let li = document.createElement('li');
-            li.innerText = exposicionesSinComentarios[i].titulo + " (" + exposicionesSinComentarios[i].fecha + ")";
+            let [yyyy, mm, dd] = (expo.fecha).split('-'); // Dividir la fecha en partes y asignarlo al array. Formato default es "YYYY-MM-DD"
+            let fechaFormato = `${dd}/${mm}/${yyyy}`; // Cambiar el formato de la fecha.
+            li.textContent = `${expo.titulo} ${fechaFormato}`;
             listaSinComentarios.appendChild(li);
         }
     } else {
@@ -319,9 +323,11 @@ function ordenarPorCalificacion() {
 
     // Cambia el texto del botón según el orden
     const botonCalificacion = document.getElementById('tableButton');
-    botonCalificacion.innerText = ordenCreciendo
-        ? 'Calificación creciente'
-        : 'Calificación decreciente';
+    if(ordenCreciendo){
+        botonCalificacion.innerText = 'Calificación creciente';
+    } else{
+        botonCalificacion.innerText = 'Calificación decreciente';
+    }
 
     actualizarTablaComentarios(filtroOrdenado);
 }
@@ -349,7 +355,16 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
         botonAmpliar.className = 'button';
         botonAmpliar.onclick = function (event) {
             event.preventDefault(); // Prevenir refresco
-            alert(`Información de la Exposición:\nFecha: ${visita.exposicion.fecha}\nDescripción: ${visita.exposicion.descripcion}\nArtistas:\n${visita.exposicion.artistas.nombre} + `);
+            let artistasInfo = visita.exposicion.artistas
+            .map(artista => {return `${artista.nombre} Edad: ${artista.edad} Estilo: ${artista.caracteristica}`;})
+            .join('\n'); // Unir las líneas con un salto de línea
+
+            artistasInfo = artistasInfo.replace(/\n\s*\n/g, '\n'); // Eliminar líneas vacías
+
+            let [yyyy, mm, dd] = (visita.exposicion.fecha).split('-'); // Dividir la fecha en partes y asignarlo al array. Formato default es "YYYY-MM-DD"
+            let fechaFormato = `${dd}/${mm}/${yyyy}`; // Cambiar el formato de la fecha.
+
+            alert(`Información de la Exposición:\nFecha: ${fechaFormato}\nDescripción: ${visita.exposicion.descripcion}\nArtistas:\n${artistasInfo}`); // Mostrar alerta con la información
         };
 
         celdaAmpliar.appendChild(botonAmpliar);

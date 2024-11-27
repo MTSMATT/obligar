@@ -12,6 +12,8 @@ function inicio() {
     document.getElementById('formComentariosDeVisitas').addEventListener('submit', function (e) {
         e.preventDefault()
         agregarComentario()
+        ordenarPorCalificacion()
+        ordenCreciendo = true;
     })
     
     // document.getElementById('botonAgregarExposicion').addEventListener('click', agregarExposicion);

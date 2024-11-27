@@ -1,5 +1,4 @@
 - W3C
-- Alert de ampliar, arreglar que muestre los artistas con nombre, edad y estilo. cada artista en una linea distinta ordenados alfabeticamente.
 - No aparece en creciente ni en decreciente al hacer ejemplo del video. 
     Esto pasa al agregar por primera vez sin hacer click en el boton creciente, una vez haces click esto no pasa.
     Debería aparecer en creciente por defecto.
@@ -15,7 +14,7 @@
 - Chequear la funcion del sort en la tabla 
 
 
-
+-LISTO- Alert de ampliar, arreglar que muestre los artistas con nombre, edad y estilo. cada artista en una linea distinta ordenados alfabeticamente.
 -LISTO- Probar en la compu del laboratorio
 -LISTO- Filtro de la tabla no anda
 -LISTO- SI/NO de la tabla van en mayúsculas

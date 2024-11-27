@@ -332,7 +332,13 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
         botonAmpliar.className = 'button';
         botonAmpliar.onclick = function (event) {
             event.preventDefault(); // Prevenir refresco
-            alert(`Información de la Exposición:\nFecha: ${visita.exposicion.fecha}\nDescripción: ${visita.exposicion.descripcion}\nArtistas:\n${visita.exposicion.artistas.nombre} + `);
+            let artistasInfo = visita.exposicion.artistas
+            .map(artista => {return `${artista.nombre} Edad: ${artista.edad} Estilo: ${artista.caracteristica}`;})
+            .join('\n'); // Unir las líneas con un salto de línea
+
+            artistasInfo = artistasInfo.replace(/\n\s*\n/g, '\n'); // Eliminar líneas vacías
+
+            alert(`Información de la Exposición:\nFecha: ${visita.exposicion.fecha}\nDescripción: ${visita.exposicion.descripcion}\nArtistas:\n${artistasInfo}`); // Mostrar alerta con la información
         };
 
         celdaAmpliar.appendChild(botonAmpliar);

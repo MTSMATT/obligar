@@ -12,8 +12,8 @@ function inicio() {
     document.getElementById('formComentariosDeVisitas').addEventListener('submit', function (e) {
         e.preventDefault()
         agregarComentario()
-        ordenarPorCalificacion()
         ordenCreciendo = true;
+        ordenarPorCalificacion()
     })
     
     document.getElementById('formIngresarExposiciones').addEventListener('submit', function (e) {
@@ -309,10 +309,14 @@ function ordenarPorCalificacion() {
 
     // Ordena las visitas según el estado de `ordenCreciendo`
     let filtroOrdenado = visitasFiltradas.sort((a, b) => {
-        if (ordenCreciendo) {
-            return a.calificacion - b.calificacion; // Acendente
-        } else {
-            return b.calificacion - a.calificacion; // Descendente
+        if (visitasFiltradas.length > 1) {
+            
+            if (ordenCreciendo) {
+                return a.calificacion - b.calificacion; // Ascendente
+            } else {
+                return b.calificacion - a.calificacion; // Descendente
+            }
+
         }
     });
 
@@ -321,10 +325,13 @@ function ordenarPorCalificacion() {
 
     // Cambia el texto del botón según el orden
     const botonCalificacion = document.getElementById('tableButton');
-    if(ordenCreciendo){
-        botonCalificacion.innerText = 'Calificación creciente';
-    } else{
-        botonCalificacion.innerText = 'Calificación decreciente';
+
+    if (visitasFiltradas.length > 1) {
+        if(ordenCreciendo){
+            botonCalificacion.innerText = 'Calificación creciente';
+        } else{
+            botonCalificacion.innerText = 'Calificación decreciente';
+        }
     }
 
     actualizarTablaComentarios(filtroOrdenado);

@@ -12,6 +12,9 @@
 - Boton: Al presionar "Calificación creciente " se cambia el texto a “Calificación decreciente” o viceversa, ordenando según el texto
 - Borrar codigo comentado
 - Agregar comentarios con claude/gpt
+- Chequear la funcion del sort en la tabla 
+
+
 
 -LISTO- Probar en la compu del laboratorio
 -LISTO- Filtro de la tabla no anda
@@ -19,6 +22,3 @@
 -LISTO- Agregar comentarios con nombres de nostros en todos los archivos
 -LISTO- Chequear no agreagar expo con el mismo titulo
 -LISTO- Sacar bold en tabla y Informacion general
--LISTO- Orden alfabetico de select y exposiciones
--LISTO- Chequear la rubrica si está todo OK (lo que falta de la rubrica está en to-do)
-

@@ -298,9 +298,11 @@ function ordenarPorCalificacion() {
 
     // Cambiar el texto del botón según el estado de la variable ordenCreciendo
     const botonCalificacion = document.getElementById('tableButton');
-    botonCalificacion.innerText = ordenCreciendo
-        ? 'Calificación decreciente'
-        : 'Calificación creciente';
+    if(ordenCreciendo){
+        botonCalificacion.innerText = 'Calificación creciente';
+    } else{
+        botonCalificacion.innerText = 'Calificación decreciente';
+    }
 
     // Alternar el estado de ordenCreciendo
     ordenCreciendo = !ordenCreciendo;

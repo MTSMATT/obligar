@@ -1,12 +1,11 @@
 - W3C
-
-- Al filtrar en la tabla por exposicion y hacer click en creciente, 
-    la tabla se reinicia y muestra a todos los comentarios de forma creciente, cuando deberia mostrar solo los filtrados.
-- Al pasar un artista del select der al izq y volver a pasarlo, el artista se suma úlitmo en la lista, 
-    cuando debería actualizarse toda la lista alfabeticamente
 - Agregar comentarios con claude/gpt
-- Chequear la funcion del sort en la tabla 
 
+-LISTO- Chequear la funcion del sort en la tabla
+-LISTO- Al filtrar en la tabla por exposicion y hacer click en creciente, 
+    la tabla se reinicia y muestra a todos los comentarios de forma creciente, cuando deberia mostrar solo los filtrados.
+-LISTO- Al pasar un artista del select der al izq y volver a pasarlo, el artista se suma úlitmo en la lista, 
+    cuando debería actualizarse toda la lista alfabeticamente
 -LISTO- Debería aparecer en creciente por defecto. No aparece en creciente ni en decreciente al hacer ejemplo del video. 
     Esto pasa al agregar por primera vez sin hacer click en el boton creciente, una vez haces click esto no pasa.
 -LISTO- Borrar codigo comentado

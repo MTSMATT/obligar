@@ -170,6 +170,7 @@ function agregarComentario() {
 
     // Obtenemos los datos del formulario
     let exposicionSelect = document.getElementById('exposicion');
+    
     let exposicion = sistema.exposiciones[exposicionSelect.selectedIndex];
     
     let nombreVisitante = document.getElementById('nombreVisitante').value;

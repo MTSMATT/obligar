@@ -16,11 +16,9 @@ function inicio() {
         ordenCreciendo = true;
     })
     
-    // document.getElementById('botonAgregarExposicion').addEventListener('click', agregarExposicion);
     document.getElementById('formIngresarExposiciones').addEventListener('submit', function (e) {
         e.preventDefault()
         agregarExposicion()
-
     })
     
     document.getElementById('formRegistrarArtistas').addEventListener('submit', function (e) {
@@ -275,9 +273,9 @@ function actualizarInformacionGeneral() {
 
         for (let i = 0 ; i < exposicionesSinComentarios.length; i++) {
             let li = document.createElement('li');
-            let [yyyy, mm, dd] = (expo.fecha).split('-'); // Dividir la fecha en partes y asignarlo al array. Formato default es "YYYY-MM-DD"
+            let [yyyy, mm, dd] = (exposicionesSinComentarios[i].fecha).split('-'); // Dividir la fecha en partes y asignarlo al array. Formato default es "YYYY-MM-DD"
             let fechaFormato = `${dd}/${mm}/${yyyy}`; // Cambiar el formato de la fecha.
-            li.textContent = `${expo.titulo} ${fechaFormato}`;
+            li.textContent = `${exposicionesSinComentarios[i].titulo} ${fechaFormato}`;
             listaSinComentarios.appendChild(li);
         }
     } else {

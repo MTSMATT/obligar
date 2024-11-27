@@ -90,16 +90,9 @@ class Sistema {
 
     // Ordenamos las expos sin comentarios
     ordenarPorFecha(exposiciones) {
-        for (let i = 0; i < exposiciones.length - 1; i++) {
-            for (let j = 0; j < exposiciones.length - i - 1; j++) {
-                if (exposiciones[j].fecha > exposiciones[j + 1].fecha) {
-                    let temp = exposiciones[j];
-                    exposiciones[j] = exposiciones[j + 1];
-                    exposiciones[j + 1] = temp;
-                }
-            }
-        }
-        return exposiciones;
+
+        // Con el objeto Date ordenamos por fecha
+        return exposiciones.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
     }
 
     ordenarVisitasPorCalificacion(ordenCreciendo) {

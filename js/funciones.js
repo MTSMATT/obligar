@@ -58,61 +58,90 @@ function cambiarColores(){
 
 function agregarArtista(){
 
+    // Obtenemos datos del formulario
     let nombre = document.getElementById('nombre').value;
     let edad = parseInt(document.getElementById('edad').value);
     let caracteristica = document.getElementById('caracteristica').value;
 
-    // Verificar si todos los campos están completos
-    /*
-    if (!nombre || isNaN(edad) || !caracteristica) {
-        alert('Por favor, completa todos los campos correctamente.');
-        return;
-    }*/
-
+    // Creamos un nuevo artista con la estructura de la clase Artista 
     let artista = new Artista(nombre, edad, caracteristica);
 
+    // Si el artista ya esta, al agregarlo a sistema devolvera false, sino, entraen el if y lo agrega
     if (sistema.agregarArtista(artista)) {
         document.getElementById('formRegistrarArtistas').reset(); // Limpiar el formulario
-        actualizarListasArtistas(); // Actualizar listas
+        actualizarListasArtistas(); // Actualizar el select de los artistas
     } else {
         alert('El artista ya existe. Intenta nuevamente.');
     }
 }
 
 function moverArtistaDerecha(){
+
+    //Traemos los dos selects
     let listaArtistas1 = document.getElementById("idListaArtistas1");
     let listaArtistas2 = document.getElementById("idListaArtistas2");
 
-    // Obtiene los artistas seleccionados en el primer select
+    // Obtiene los artistas seleccionados en el primer select y lo convierte en un array
     let opcionesSeleccionadas = Array.from(listaArtistas1.selectedOptions);
 
-    // Mueve cada opción seleccionada al segundo select
+    // Mueve CADA UNA opción seleccionada del primer select al segundo select
     opcionesSeleccionadas.forEach(opcion => {
         listaArtistas2.appendChild(opcion);
     });
+
 }
 
 function moverArtistaIzquierda(){
+
+    // Traemos los dos selects
     let listaArtistas1 = document.getElementById("idListaArtistas1");
     let listaArtistas2 = document.getElementById("idListaArtistas2");
 
-    // Obtiene los artistas seleccionados en el segundo select
+    // Obtiene los artistas seleccionados en el segundo select y los convierte en un array
     let opcionesSeleccionadas = Array.from(listaArtistas2.selectedOptions);
 
-    // Mueve cada opción seleccionada al primer select
+    // Mueve CADA UNA de las opciones seleccionadas del segundo select al primer select
     opcionesSeleccionadas.forEach(opcion => {
         listaArtistas1.appendChild(opcion);
     });
+
+    // Ordenamos alfabeticamente
+    actualizarListasArtistas()
 }
 
+function actualizarListasArtistas() {
+
+    // Traemos el primer select y lo limpiamos
+    let lista = document.getElementById('idListaArtistas1');
+    lista.innerHTML = '';
+    
+    // Ordenamos los artistas alfabeticamente
+    let sortedArtistas = sistema.artistas.sort((a, b) => {
+        if (a.nombre < b.nombre) return -1; // Coloca -> a antes que b
+        if (a.nombre > b.nombre) return 1; // Coloca -> b antes que a
+        return 0;
+    });
+
+    // Va creando las opciones ordenadas y las mete en el select 
+    for (let i = 0; i < sistema.artistas.length; i++) {
+        let option = document.createElement('option');
+        option.innerText = sortedArtistas[i].nombre;
+        lista.add(option);
+    }
+}   
+
 function agregarExposicion(){
+
+    // Traemos los datos del formulario
     let titulo = document.getElementById("titulo").value.trim();
     let fecha = document.getElementById("fecha").value;
     let descripcion = document.getElementById("descripcion").value.trim();
 
+    // Obtenemos los artistas seleccionados en formato de array
     let artistasSeleccionados = Array.from(document.getElementById("idListaArtistas2").options);
     let artistas = []
-    
+
+    // Comparamos al nombre del artista seleccionado con el nombre de los artistas en sistema, para pushear al artista con todos sus datos
     for (let i = 0; i < artistasSeleccionados.length; i++) {
         for (let j = 0; j < sistema.artistas.length; j++) {
             if (sistema.artistas[j].nombre === artistasSeleccionados[i].text) {
@@ -120,14 +149,11 @@ function agregarExposicion(){
             }
         }
     }
-    /*
-    if (!titulo || !fecha || !descripcion || artistas.length === 0) {
-        alert('Por favor, completa todos los campos y selecciona al menos un artista.');
-        return;
-    }*/
 
+    // Creamos una nueva exposicion con los datos obtenidos, usando la calse Exposicion
     let exposicion = new Exposicion(titulo, fecha, descripcion, artistas);
    
+    // Si la exposicion ya existe, no se agrega, sino, se agrega (esto es porque el metoodo agregarExposicion retorna true o false)
     if (sistema.agregarExposicion(exposicion)) {
         document.getElementById('formIngresarExposiciones').reset(); // Limpiar el formulario
         document.getElementById('idListaArtistas2').innerHTML = ''; // Vaciar la lista de artistas seleccionados
@@ -138,24 +164,19 @@ function agregarExposicion(){
         alert('La exposición ya existe, intenta nuevamente.');
     }
 
-
 }
 
 function agregarComentario() {
 
+    // Obtenemos los datos del formulario
     let exposicionSelect = document.getElementById('exposicion');
     let exposicion = sistema.exposiciones[exposicionSelect.selectedIndex];
+    
     let nombreVisitante = document.getElementById('nombreVisitante').value;
     let comentario = document.getElementById('comentario').value;
     let calificacion = document.querySelector('input[name="calificacion"]:checked').value;
     let guiada = document.getElementById('guia').checked;
     
-    /*
-    if(!exposicionSelect || !nombreVisitante || !calificacion) {
-        alert('Por favor, completa todos los campos y selecciona al menos un artista.');
-        return
-    }*/
-
     let visita = new Visita(exposicion, nombreVisitante, comentario, calificacion, guiada);
 
     if (sistema.agregarVisita(visita)) {
@@ -170,23 +191,7 @@ function agregarComentario() {
     console.log(sistema.visitas)
 }
 
-function actualizarListasArtistas() {
-    let lista1 = document.getElementById('idListaArtistas1');
-    lista1.innerHTML = '';
-    
-    // sortedArtistas = sistema.artistas.sort((a, b) => a.nombre.localeCompare(b.nombre))
-    let sortedArtistas = sistema.artistas.sort((a, b) => {
-        if (a.nombre < b.nombre) return -1;
-        if (a.nombre > b.nombre) return 1;
-        return 0;
-    });
 
-    for (let i = 0; i < sistema.artistas.length; i++) {
-        let option = document.createElement('option');
-        option.text = sortedArtistas[i].nombre;
-        lista1.add(option);
-    }
-}   
 
 function filtrarTablaPorExposicion() {
     const filtro = document.getElementById('exposicionFiltro').value;

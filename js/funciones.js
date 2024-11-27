@@ -169,17 +169,19 @@ function agregarExposicion(){
 function agregarComentario() {
 
     // Obtenemos los datos del formulario
-    let exposicionSelect = document.getElementById('exposicion');
-    
-    let exposicion = sistema.exposiciones[exposicionSelect.selectedIndex];
-    
+    let exposicionSelect = document.getElementById('exposicion');    
     let nombreVisitante = document.getElementById('nombreVisitante').value;
     let comentario = document.getElementById('comentario').value;
     let calificacion = document.querySelector('input[name="calificacion"]:checked').value;
     let guiada = document.getElementById('guia').checked;
+
+    // Guardamos la exposicion seleccionada (selectedIndex es el indice de la opcion seleccionada)
+    let exposicion = sistema.exposiciones[exposicionSelect.selectedIndex];
     
+    // Creamos una nueva visita con los datos obtenidos usando la clase Visita
     let visita = new Visita(exposicion, nombreVisitante, comentario, calificacion, guiada);
 
+    // Si la visita se agrega correctamente (porque la calse retorna true or false), se limpia el formulario y se actualiza la tabla
     if (sistema.agregarVisita(visita)) {
         document.getElementById('formComentariosDeVisitas').reset();
         actualizarTablaComentarios();
@@ -187,86 +189,93 @@ function agregarComentario() {
     } else {
         alert('No se pudo agregar la exposición. Intenta nuevamente.') // En caso de errores inesperados
     }
-
-    console.log(sistema.exposiciones)
-    console.log(sistema.visitas)
 }
 
-
-
 function filtrarTablaPorExposicion() {
+
+    // Obtenemos el valor del select de exposiciones
     const filtro = document.getElementById('exposicionFiltro').value;
     
     let visitasFiltradas = []
 
+    // Filtrar las visitas que coincidan con el filtro
     if (filtro === 'todas') {
-        visitasFiltradas = sistema.visitas;  // No es necesario hacer nada más si seleccionan 'todas'
+        visitasFiltradas = sistema.visitas;  // Mostrar todas las visitas
     } else {
-        // Filtrar las visitas que coincidan con el filtro
         for (let i = 0; i < sistema.visitas.length; i++) {
-            if (sistema.visitas[i].exposicion.titulo === filtro) {
-                visitasFiltradas.push(sistema.visitas[i]);  // Agregar la visita al arreglo
+            if (sistema.visitas[i].exposicion.titulo === filtro) { // Si la exposicion de la visita coincide con el filtro 
+                visitasFiltradas.push(sistema.visitas[i]);  // Agregar la visita al array
             }
         }
     }
 
     // Actualizar la tabla con las visitas filtradas
     actualizarTablaComentarios(visitasFiltradas);
+
+    return visitasFiltradas;
 }
 
 function actualizarListaExposiciones() {
+
+    // Obtenemos los selects de exposiciones y de filtrar exposiciones
     let selectExposicion = document.getElementById('exposicion');
     let selectFiltro = document.getElementById('exposicionFiltro');
-    selectExposicion.innerHTML = '';
-    selectFiltro.innerHTML = '<option value="todas">Todas</option>';
-    
-    let exposicionesSorted = sistema.exposiciones.sort((a, b) => {
-        if (a.titulo < b.titulo) return -1;
-        if (a.titulo > b.titulo) return 1;
-        return 0;
-    })
 
+    selectExposicion.innerHTML = ''; // Limpiar el select
+    selectFiltro.innerHTML = '<option value="todas">Todas</option>'; // Limpiar el select y agregar la opción 'Todas'
+    
+    // Ordenamos las exposiciones alfabeticamente
+    let exposicionesSorted = sistema.ordenarExposicionesAlfabeticamente();
+
+    // Creamos las opciones de los selects con las exposiciones ordenadas en ambos selects
     for (let i = 0; i < sistema.exposiciones.length; i++) {
-        let option1 = document.createElement('option');
-        let option2 = document.createElement('option');
-        option1.text = exposicionesSorted[i].titulo;
-        option2.text = exposicionesSorted[i].titulo;
+        let optionExposicion = document.createElement('option');
+        let optionFiltro = document.createElement('option');
+
+        optionExposicion.innerText = exposicionesSorted[i].titulo;
+        optionFiltro.innerText = exposicionesSorted[i].titulo;
         
-        selectExposicion.add(option1);
-        selectFiltro.add(option2);
+        selectExposicion.add(optionExposicion);
+        selectFiltro.add(optionFiltro);
     }
 }
 
 // Función para actualizar la información general
 function actualizarInformacionGeneral() {
  
+    // Expos con mas artistas usando el metodo de Sistema
     let exposicionesMasArtistas = sistema.obtenerExposicionesConMasArtistas();
-    let listaMasArtistas = document.querySelector('#sectionInfo ul:first-of-type');
-    listaMasArtistas.innerHTML = '';
     
+    let listaMasArtistas = document.getElementById('listaMasArtistas');
+    // Limpiamos el contenido de la lista
+    listaMasArtistas.innerHTML = '';
+
+    // Si hay exposiciones con más artistas, las agregamos a la lista
     if (exposicionesMasArtistas.length > 0) {
-        exposicionesMasArtistas.forEach((expo) => {
-            let li = document.createElement('li');
-            li.textContent = expo.titulo;
-            listaMasArtistas.appendChild(li);
-        });
+        for (let i = 0; i < exposicionesMasArtistas.length; i++) {
+            let li = document.createElement('li'); // Creamos un elemento li
+            li.innerText = exposicionesMasArtistas[i].titulo; // Agregamos el título de la exposición
+            listaMasArtistas.appendChild(li); // Agregamos el li a la lista
+        }
     } else {
+        // Si no hay exposiciones con más artistas, agregamos un li con el texto 'sin datos'
         let li = document.createElement('li');
-        li.textContent = 'sin datos';
+        li.innerText = 'sin datos';
         listaMasArtistas.appendChild(li);
     }
 
     // Expos sin comntarios
     let exposicionesSinComentarios = sistema.obtenerExposicionesSinComentarios();
-    let listaSinComentarios = document.querySelector('#sectionInfo ul:nth-of-type(2)');
+    let listaSinComentarios = document.getElementById('listaSinComentarios');
     listaSinComentarios.innerHTML = '';
 
     if (exposicionesSinComentarios.length > 0) {
-        exposicionesSinComentarios.forEach((expo) => {
+
+        for (let i = 0 ; i < exposicionesSinComentarios.length; i++) {
             let li = document.createElement('li');
-            li.textContent = `${expo.titulo} (${expo.fecha})`;
+            li.innerText = exposicionesSinComentarios[i].titulo + " (" + exposicionesSinComentarios[i].fecha + ")";
             listaSinComentarios.appendChild(li);
-        });
+        }
     } else {
         let li = document.createElement('li');
         li.textContent = 'sin datos';
@@ -284,7 +293,7 @@ function obtenerImagenCalificacion(calificacion) {
     };
 
     let img = document.createElement('img');
-    img.src = rutasImagenes[calificacion];
+    img.src = rutasImagenes[calificacion]; // el path sera el valor de la calificacion pasado por parametro
     img.alt = `Calificación ${calificacion}`;
     img.className = 'imagen'; // Clase para asegurar que las imágenes sean consistentes con las del formulario
     return img;
@@ -292,21 +301,29 @@ function obtenerImagenCalificacion(calificacion) {
 
 let ordenCreciendo = true; // Variable para controlar si el orden es creciente o decreciente
 function ordenarPorCalificacion() {
-    // Cambiar el orden de las visitas de acuerdo con el valor de ordenCreciendo
- 
-    sistema.ordenarVisitasPorCalificacion(ordenCreciendo)
 
-    // Cambiar el texto del botón según el estado de la variable ordenCreciendo
-    const botonCalificacion = document.getElementById('tableButton');
-    botonCalificacion.innerText = ordenCreciendo
-        ? 'Calificación decreciente'
-        : 'Calificación creciente';
+    // Filtrar las visitas de acuerdo con el filtro actual
+    let visitasFiltradas = filtrarTablaPorExposicion(); 
 
-    // Alternar el estado de ordenCreciendo
+    // Ordena las visitas según el estado de `ordenCreciendo`
+    let filtroOrdenado = visitasFiltradas.sort((a, b) => {
+        if (ordenCreciendo) {
+            return a.calificacion - b.calificacion; // Acendente
+        } else {
+            return b.calificacion - a.calificacion; // Descendente
+        }
+    });
+
+    // Alterna el estado de orden
     ordenCreciendo = !ordenCreciendo;
 
-    // Actualizar la tabla con los datos ordenados
-    actualizarTablaComentarios();
+    // Cambia el texto del botón según el orden
+    const botonCalificacion = document.getElementById('tableButton');
+    botonCalificacion.innerText = ordenCreciendo
+        ? 'Calificación creciente'
+        : 'Calificación decreciente';
+
+    actualizarTablaComentarios(filtroOrdenado);
 }
 
 function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto vale sistema.visitas, si se para un parametro se usa ese

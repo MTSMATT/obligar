@@ -360,10 +360,11 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
         botonAmpliar.className = 'button';
         botonAmpliar.onclick = function (event) {
             event.preventDefault(); // Prevenir refresco
-            let artistasInfo = visita.exposicion.artistas
-            .map(artista => {return `${artista.nombre} Edad: ${artista.edad} Estilo: ${artista.caracteristica}`;})
-            .join('\n'); // Unir las líneas con un salto de línea
-            
+            let artistasInfo = '';
+            for (let i = 0; i < visita.exposicion.artistas.length; i++) {
+                let artista = visita.exposicion.artistas[i];
+                artistasInfo += `${artista.nombre} Edad: ${artista.edad} Estilo: ${artista.caracteristica}\n`;
+            }
 
             artistasInfo = artistasInfo.replace(/\n\s*\n/g, '\n'); // Eliminar líneas vacías
 

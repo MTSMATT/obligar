@@ -10,20 +10,20 @@ function inicio() {
     
     // Obtenemos el form de los coments para prevenir la recarga al darle al boton, Luego ejecutamos la funcion agregar comentario
     document.getElementById('formComentariosDeVisitas').addEventListener('submit', function (e) {
-        e.preventDefault()
-        agregarComentario()
-        ordenCreciendo = true;
-        ordenarPorCalificacion()
+        e.preventDefault();
+        agregarComentario();
+        ordenCreciendo = true; // Restablecer el orden a creciente
+        ordenarPorCalificacion(); // Ordenar por calificación
     })
     
     document.getElementById('formIngresarExposiciones').addEventListener('submit', function (e) {
-        e.preventDefault()
-        agregarExposicion()
+        e.preventDefault();
+        agregarExposicion(); // Agregar exposicion
     })
     
     document.getElementById('formRegistrarArtistas').addEventListener('submit', function (e) {
         e.preventDefault(); // Prevenir recarga de la página
-        agregarArtista();
+        agregarArtista(); // Agregar artista
     });
     
     // Botones de movimiento de artistas
@@ -34,23 +34,23 @@ function inicio() {
 
     document.getElementById('exposicionFiltro').addEventListener('change', filtrarTablaPorExposicion);
  
-    actualizarListasArtistas();
-    actualizarListaExposiciones();
-    actualizarTablaComentarios();
+    actualizarListasArtistas(); // Actualizar el select de artistas
+    actualizarListaExposiciones(); // Actualizar el select de exposiciones
+    actualizarTablaComentarios();  // Actualizar la tabla de comentarios
 }
 
 let colorOriginal = true;
 function cambiarColores(){
-    let cambiarColor = document.getElementsByClassName("cambiarColor")
+    let cambiarColor = document.getElementsByClassName("cambiarColor"); // Traemos todos los elementos con la clase cambiarColor
 
     if(colorOriginal){
         for (let i = 0; i < cambiarColor.length; i++) {
-            cambiarColor[i].style.backgroundColor = "#8DB58E"        
+            cambiarColor[i].style.backgroundColor = "#8DB58E"; // Cambiamos el color de fondo   
         }
         colorOriginal = false;
     } else if (!colorOriginal){
         for (let i = 0; i < cambiarColor.length; i++) {
-            cambiarColor[i].style.backgroundColor = "#98fb98"
+            cambiarColor[i].style.backgroundColor = "#98fb98"; // Cambiamos el color de fondo
         }
         colorOriginal = true;
     }
@@ -106,7 +106,7 @@ function moverArtistaIzquierda(){
     });
 
     // Ordenamos alfabeticamente
-    actualizarListasArtistas()
+    actualizarListasArtistas();
 }
 
 function actualizarListasArtistas() {
@@ -187,7 +187,7 @@ function agregarComentario() {
         actualizarTablaComentarios();
         actualizarInformacionGeneral();
     } else {
-        alert('No se pudo agregar la exposición. Intenta nuevamente.') // En caso de errores inesperados
+        alert('No se pudo agregar la exposición. Intenta nuevamente.'); // En caso de errores inesperados
     }
 }
 
@@ -196,7 +196,7 @@ function filtrarTablaPorExposicion() {
     // Obtenemos el valor del select de exposiciones
     const filtro = document.getElementById('exposicionFiltro').value;
     
-    let visitasFiltradas = []
+    let visitasFiltradas = []; // Array para guardar las visitas filtradas
 
     // Filtrar las visitas que coincidan con el filtro
     if (filtro === 'todas') {
@@ -232,9 +232,11 @@ function actualizarListaExposiciones() {
         let optionExposicion = document.createElement('option');
         let optionFiltro = document.createElement('option');
 
+        // Agregamos el titulo de la exposicion a las opciones
         optionExposicion.innerText = exposicionesSorted[i].titulo;
         optionFiltro.innerText = exposicionesSorted[i].titulo;
         
+        // Agregamos las opciones a los selects
         selectExposicion.add(optionExposicion);
         selectFiltro.add(optionFiltro);
     }
@@ -326,11 +328,12 @@ function ordenarPorCalificacion() {
     // Cambia el texto del botón según el orden
     const botonCalificacion = document.getElementById('tableButton');
 
+    // Si hay más de una visita, cambia el texto del botón
     if (visitasFiltradas.length > 1) {
         if(ordenCreciendo){
-            botonCalificacion.innerText = 'Calificación creciente';
-        } else{
             botonCalificacion.innerText = 'Calificación decreciente';
+        } else{
+            botonCalificacion.innerText = 'Calificación creciente';
         }
     }
 
@@ -347,25 +350,25 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
     }
 
     // visitas.forEach((visita) => {
-        for (let i = 0; i < visitas.length; i++) {
-            let visita = visitas[i];  // Acceder al elemento actual de visitas
-        let fila = tabla.insertRow();
+    for (let i = 0; i < visitas.length; i++) {
+        let visita = visitas[i];  // Acceder al elemento actual de visitas
+        let fila = tabla.insertRow(); // Insertar una fila en la tabla
 
         // Columna: Título
-        let celdaTitulo = fila.insertCell();
-        celdaTitulo.textContent = visita.exposicion.titulo;
+        let celdaTitulo = fila.insertCell(); // Insertar una celda en la fila
+        celdaTitulo.textContent = visita.exposicion.titulo; // Agregar el título de la exposición
 
         // Columna: Más datos
-        let celdaAmpliar = fila.insertCell();
-        let botonAmpliar = document.createElement('button');
+        let celdaAmpliar = fila.insertCell(); // Insertar una celda en la fila
+        let botonAmpliar = document.createElement('button'); 
         botonAmpliar.textContent = 'Ampliar';
         botonAmpliar.className = 'button';
-        botonAmpliar.onclick = function (event) {
+        botonAmpliar.onclick = function (event) { // Función para mostrar la información de la exposición
             event.preventDefault(); // Prevenir refresco
             let artistasInfo = '';
             for (let i = 0; i < visita.exposicion.artistas.length; i++) {
-                let artista = visita.exposicion.artistas[i];
-                artistasInfo += `${artista.nombre} Edad: ${artista.edad} Estilo: ${artista.caracteristica}\n`;
+                let artista = visita.exposicion.artistas[i]; // Acceder al artista actual
+                artistasInfo += `${artista.nombre} Edad: ${artista.edad} Estilo: ${artista.caracteristica}\n`;  // Agregar la información del artista
             }
 
             artistasInfo = artistasInfo.replace(/\n\s*\n/g, '\n'); // Eliminar líneas vacías
@@ -399,5 +402,4 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
         celdaCalificacion.className = 'borderRight';
         
     }
-        // });
 }

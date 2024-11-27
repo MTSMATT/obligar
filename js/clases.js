@@ -27,8 +27,8 @@ class Sistema {
                 return false;
             }
         }
-        this.exposiciones.push(exposicion);
-        return true;
+        this.exposiciones.push(exposicion); // Agreagamos al array
+        return true; // Funcion exitosa (por defecto retorna undefine)
     }
 
     // Metodo para agregar nueva visita
@@ -105,6 +105,7 @@ class Sistema {
     }
 }
 
+// moldes de las clases para crear objetos 
 class Artista {
     constructor(nombre, edad, caracteristica) {
         this.nombre = nombre;

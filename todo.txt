@@ -1,5 +1,6 @@
 - W3C
 - Agregar comentarios con claude/gpt
+- Al agregar artistas a una exposicion, desaparecen del select y no se recarga como debería
 
 -LISTO- Chequear la funcion del sort en la tabla
 -LISTO- Al filtrar en la tabla por exposicion y hacer click en creciente, 

@@ -346,7 +346,9 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
         tabla.deleteRow(1);
     }
 
-    visitas.forEach((visita) => {
+    // visitas.forEach((visita) => {
+        for (let i = 0; i < visitas.length; i++) {
+            let visita = visitas[i];  // Acceder al elemento actual de visitas
         let fila = tabla.insertRow();
 
         // Columna: Título
@@ -395,5 +397,7 @@ function actualizarTablaComentarios(visitas = sistema.visitas) { // Por defecto 
         let imagenCalificacion = obtenerImagenCalificacion(visita.calificacion);
         celdaCalificacion.appendChild(imagenCalificacion);
         celdaCalificacion.className = 'borderRight';
-    });
+        
+    }
+        // });
 }
